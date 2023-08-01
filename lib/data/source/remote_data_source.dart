@@ -1,3 +1,4 @@
+import 'package:dicogram/utils/constants.dart';
 import 'package:dio/dio.dart';
 
 abstract class RemoteDataSource {
@@ -11,8 +12,7 @@ abstract class RemoteDataSource {
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
-  final Dio _dio =
-      Dio(BaseOptions(baseUrl: 'https://story-api.dicoding.dev/v1'));
+  final Dio _dio = Dio(BaseOptions(baseUrl: baseURL));
 
   @override
   Future<T> request<T>({
