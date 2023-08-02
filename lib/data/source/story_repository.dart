@@ -31,6 +31,10 @@ class StoryRepository {
     return _dataSource.request(
       endPoint: '/stories',
       modelFromJson: (json) => Story.fromJson(json),
+      headers: {
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLTUzdm9DVkw1MHRBV3ZqRkEiLCJpYXQiOjE2OTA5ODk3Mzl9.rgcHSnVtnFVRcCVQAmy1PoaiLnjqqRq3rf9uJI6W9_4'
+      },
     );
   }
 
