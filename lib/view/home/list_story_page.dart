@@ -1,5 +1,6 @@
 import 'package:dicogram/data/source/remote_data_source.dart';
 import 'package:dicogram/data/source/story_repository.dart';
+import 'package:dicogram/widget/item_story.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,39 +27,21 @@ class ListStoryPage extends StatelessWidget {
               final data = state.story.stories;
               return ListView.separated(
                 separatorBuilder: (context, index) => const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
                   child: Divider(
                     thickness: 2,
                   ),
                 ),
                 itemCount: data!.length,
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.network(
-                            data[index].photoUrl!,
-                            width: double.infinity,
-                            height: 300,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          data[index].name!,
-                          style: const TextStyle(fontSize: 20),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          data[index].description!,
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                      ],
-                    ),
+                  final story = data[index];
+                  return ItemStory(
+                    name: story.name ?? '',
+                    photoUrl: story.photoUrl ?? '',
+                    description: story.description ?? '',
+                    lat: story.lat,
+                    lon: story.lon,
+                    createdAt: story.createdAt ?? '',
                   );
                 },
               );
