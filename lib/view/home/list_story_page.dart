@@ -1,5 +1,6 @@
 import 'package:dicogram/data/source/remote_data_source.dart';
 import 'package:dicogram/data/source/story_repository.dart';
+import 'package:dicogram/utils/text_styles.dart';
 import 'package:dicogram/widget/item_story.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +17,10 @@ class ListStoryPage extends StatelessWidget {
           StoryBloc(StoryRepository(RemoteDataSourceImpl()))..add(LoadStory()),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Dicogram'),
+          title: Text(
+            'Dicogram',
+            style: TextStyles.body.copyWith(fontSize: 20),
+          ),
           centerTitle: true,
         ),
         body: BlocBuilder<StoryBloc, StoryState>(

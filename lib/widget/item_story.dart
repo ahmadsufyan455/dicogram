@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dicogram/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/helper.dart';
@@ -39,7 +40,7 @@ class ItemStory extends StatelessWidget {
                   const SizedBox(width: 16.0),
                   Text(
                     name,
-                    style: const TextStyle(fontSize: 16),
+                    style: TextStyles.title,
                   ),
                 ],
               ),
@@ -48,7 +49,10 @@ class ItemStory extends StatelessWidget {
                 FutureBuilder<String?>(
                   future: Helper.getCity(lat!, lon!),
                   builder: (context, snapshot) {
-                    return Text(snapshot.data ?? 'Unknown');
+                    return Text(
+                      snapshot.data ?? 'Unknown',
+                      style: TextStyles.subtitle,
+                    );
                   },
                 ),
             ],
@@ -74,10 +78,12 @@ class ItemStory extends StatelessWidget {
           const SizedBox(height: 10.0),
           Text(
             description,
-            style: const TextStyle(fontSize: 16),
+            style: TextStyles.body,
           ),
+          const SizedBox(height: 4.0),
           Text(
             Helper.formatTimestamp(createdAt),
+            style: TextStyles.subtitle.copyWith(color: Colors.black54),
           ),
         ],
       ),
