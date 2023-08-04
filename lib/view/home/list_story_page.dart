@@ -2,6 +2,7 @@ import 'package:dicogram/data/source/remote_data_source.dart';
 import 'package:dicogram/data/source/story_repository.dart';
 import 'package:dicogram/utils/text_styles.dart';
 import 'package:dicogram/widget/item_story.dart';
+import 'package:dicogram/widget/loading_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,7 +27,12 @@ class ListStoryPage extends StatelessWidget {
         body: BlocBuilder<StoryBloc, StoryState>(
           builder: (context, state) {
             if (state is StoryLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return ListView.builder(
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return const LoadingShimmer();
+                },
+              );
             } else if (state is StoryLoaded) {
               final data = state.story.stories;
               return ListView.separated(
