@@ -11,12 +11,14 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final fullNameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool isObscure = true;
 
   @override
   void dispose() {
+    fullNameController.dispose();
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -41,7 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Lottie.asset('assets/animations/astronaut_2.json', width: 250),
                 const SizedBox(height: 24.0),
                 TextInput(
-                  controller: emailController,
+                  controller: fullNameController,
                   hint: 'Full Name',
                   textInputType: TextInputType.name,
                   textInputAction: TextInputAction.next,
