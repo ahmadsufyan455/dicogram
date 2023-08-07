@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dicogram/data/source/remote_data_source.dart';
 import 'package:dicogram/data/source/story_repository.dart';
+import 'package:dicogram/router_v2.dart';
 import 'package:dicogram/utils/text_styles.dart';
+import 'package:dicogram/view/auth/login/bloc/login_bloc.dart';
 import 'package:dicogram/widget/item_story.dart';
 import 'package:dicogram/widget/loading_shimmer.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +26,22 @@ class ListStoryPage extends StatelessWidget {
             style: TextStyles.body.copyWith(fontSize: 20),
           ),
           centerTitle: true,
+          actions: [
+            BlocListener<LoginBloc, LoginState>(
+              listener: (context, state) {
+                if (state is LoginSuccess) {
+                  context.replaceRoute(const LoginRoute());
+                }
+              },
+              child: IconButton(
+                onPressed: () => context.read<LoginBloc>().add(Logout()),
+                icon: const Icon(
+                  Icons.logout_rounded,
+                  color: Colors.deepPurple,
+                ),
+              ),
+            ),
+          ],
         ),
         body: BlocBuilder<StoryBloc, StoryState>(
           builder: (context, state) {

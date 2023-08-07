@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                           content: Text(state.error, style: TextStyles.body),
                           actions: [
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () => context.router.pop(),
                               child: Text(
                                 'Try Again',
                                 style: TextStyles.body.copyWith(

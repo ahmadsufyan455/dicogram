@@ -28,7 +28,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(LoginLoding());
       try {
         final prefs = await SharedPreferences.getInstance();
-        await Future.delayed(const Duration(seconds: 2));
         prefs.remove('token');
         emit(const LoginSuccess());
       } catch (e) {
