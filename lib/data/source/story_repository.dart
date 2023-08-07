@@ -38,10 +38,13 @@ class StoryRepository {
     );
   }
 
-  Future<DetailStory> getDetailStory(String id) {
+  Future<DetailStory> getDetailStory(String id) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
     return _dataSource.request(
       endPoint: '/stories/$id',
       modelFromJson: (json) => DetailStory.fromJson(json),
+      headers: {'Authorization': 'Bearer $token'},
     );
   }
 }

@@ -64,13 +64,18 @@ class ListStoryPage extends StatelessWidget {
                 itemCount: data!.length,
                 itemBuilder: (context, index) {
                   final story = data[index];
-                  return ItemStory(
-                    name: story.name ?? '',
-                    photoUrl: story.photoUrl ?? '',
-                    description: story.description ?? '',
-                    lat: story.lat,
-                    lon: story.lon,
-                    createdAt: story.createdAt ?? '',
+                  return GestureDetector(
+                    onTap: () => context.pushRoute(
+                      DetailRoute(id: story.id ?? ''),
+                    ),
+                    child: ItemStory(
+                      name: story.name ?? '',
+                      photoUrl: story.photoUrl ?? '',
+                      description: story.description ?? '',
+                      lat: story.lat,
+                      lon: story.lon,
+                      createdAt: story.createdAt ?? '',
+                    ),
                   );
                 },
               );
