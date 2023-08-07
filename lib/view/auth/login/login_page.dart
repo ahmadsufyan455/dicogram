@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dicogram/data/model/login_model.dart';
 import 'package:dicogram/router_v2.dart';
 import 'package:dicogram/utils/text_styles.dart';
 import 'package:dicogram/view/auth/login/bloc/login_bloc.dart';
@@ -69,9 +70,29 @@ class _LoginPageState extends State<LoginPage> {
                 BlocConsumer<LoginBloc, LoginState>(
                   listener: (context, state) {
                     if (state is LoginSuccess) {
-                      if (state.isLogin) {
-                        context.replaceRoute(const ListStoryRoute());
-                      }
+                      context.replaceRoute(const ListStoryRoute());
+                    } else if (state is LoginError) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(
+                            'Something went wrong!',
+                            style: TextStyles.title,
+                          ),
+                          content: Text(state.error, style: TextStyles.body),
+                          actions: [
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Try Again',
+                                style: TextStyles.body.copyWith(
+                                  color: Colors.deepPurple,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
                     }
                   },
                   builder: (context, state) {
@@ -79,7 +100,13 @@ class _LoginPageState extends State<LoginPage> {
                       return const Center(child: CircularProgressIndicator());
                     }
                     return GestureDetector(
-                      onTap: () => context.read<LoginBloc>()..add(Login()),
+                      onTap: () {
+                        final loginData = RequestLogin(
+                          email: emailController.text,
+                          password: passwordController.text,
+                        ).toJson();
+                        context.read<LoginBloc>().add(Login(loginData));
+                      },
                       child: Container(
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(vertical: 16.0),

@@ -1,10 +1,10 @@
-class Register {
+class RegisterModel {
   bool? error;
   String? message;
 
-  Register({this.error, this.message});
+  RegisterModel({this.error, this.message});
 
-  Register.fromJson(Map<String, dynamic> json) {
+  RegisterModel.fromJson(Map<String, dynamic> json) {
     error = json['error'];
     message = json['message'];
   }

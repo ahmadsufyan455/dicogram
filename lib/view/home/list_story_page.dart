@@ -57,7 +57,12 @@ class ListStoryPage extends StatelessWidget {
                 },
               );
             } else if (state is StoryError) {
-              return Center(child: Text(state.error));
+              return Center(
+                child: Text(
+                  state.error,
+                  style: TextStyles.body,
+                ),
+              );
             }
             return Container();
           },

@@ -8,7 +8,10 @@ abstract class LoginEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class Login extends LoginEvent {}
+class Login extends LoginEvent {
+  final Map<String, dynamic> data;
+  const Login(this.data);
+}
 
 class Logout extends LoginEvent {}
 

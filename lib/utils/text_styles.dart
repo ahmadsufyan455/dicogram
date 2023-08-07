@@ -22,4 +22,11 @@ class TextStyles {
     fontSize: 16.0,
     color: textColor,
   );
+
+  static TextStyle splash = const TextStyle(
+    fontFamily: 'Quicksand',
+    fontWeight: FontWeight.w700,
+    fontSize: 34.0,
+    color: Colors.white,
+  );
 }

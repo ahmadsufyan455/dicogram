@@ -1,3 +1,5 @@
+import 'package:dicogram/data/source/remote_data_source.dart';
+import 'package:dicogram/data/source/story_repository.dart';
 import 'package:dicogram/router_v2.dart';
 import 'package:dicogram/view/auth/login/bloc/login_bloc.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final routerV2 = RouterV2();
     return BlocProvider(
-      create: (context) => LoginBloc(),
+      create: (context) => LoginBloc(StoryRepository(RemoteDataSourceImpl())),
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         title: 'Dicogram',

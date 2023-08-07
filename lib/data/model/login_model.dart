@@ -1,11 +1,11 @@
-class Login {
+class LoginModel {
   bool? error;
   String? message;
   LoginResult? loginResult;
 
-  Login({this.error, this.message, this.loginResult});
+  LoginModel({this.error, this.message, this.loginResult});
 
-  Login.fromJson(Map<String, dynamic> json) {
+  LoginModel.fromJson(Map<String, dynamic> json) {
     error = json['error'];
     message = json['message'];
     loginResult = LoginResult.fromJson(json['loginResult']);

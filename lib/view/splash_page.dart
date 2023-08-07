@@ -14,12 +14,9 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  late LoginBloc loginBloc;
-
   @override
   void initState() {
-    loginBloc = context.read<LoginBloc>();
-    loginBloc.add(GetUser());
+    context.read<LoginBloc>().add(GetUser());
     super.initState();
   }
 
@@ -28,7 +25,7 @@ class _SplashPageState extends State<SplashPage> {
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
-          if (state.isLogin) {
+          if (state.token != null) {
             context.replaceRoute(const ListStoryRoute());
           } else {
             context.replaceRoute(const LoginRoute());
@@ -36,10 +33,11 @@ class _SplashPageState extends State<SplashPage> {
         }
       },
       child: Scaffold(
+        backgroundColor: Colors.deepPurple,
         body: Center(
           child: Text(
-            'Splash Screen',
-            style: TextStyles.title,
+            'Dicogram',
+            style: TextStyles.splash,
           ),
         ),
       ),

@@ -12,8 +12,11 @@ class LoginInitial extends LoginState {}
 class LoginLoding extends LoginState {}
 
 class LoginSuccess extends LoginState {
-  final bool isLogin;
-  const LoginSuccess({this.isLogin = false});
+  final String? token;
+  const LoginSuccess({this.token});
 }
 
-class LoginError extends LoginState {}
+class LoginError extends LoginState {
+  final String error;
+  const LoginError(this.error);
+}
