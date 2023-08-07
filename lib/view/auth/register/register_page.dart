@@ -1,8 +1,11 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:dicogram/router_v2.dart';
 import 'package:dicogram/utils/text_styles.dart';
 import 'package:dicogram/widget/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+@RoutePage()
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -93,7 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   style: TextStyles.body,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () => context.replaceRoute(const LoginRoute()),
                   child: Text(
                     'Login Now',
                     style: TextStyles.body.copyWith(

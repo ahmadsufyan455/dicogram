@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:dicogram/data/source/remote_data_source.dart';
 import 'package:dicogram/data/source/story_repository.dart';
 import 'package:dicogram/utils/text_styles.dart';
@@ -5,9 +6,9 @@ import 'package:dicogram/widget/item_story.dart';
 import 'package:dicogram/widget/loading_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'bloc/story_bloc.dart';
 
+@RoutePage()
 class ListStoryPage extends StatelessWidget {
   const ListStoryPage({super.key});
 
@@ -60,6 +61,10 @@ class ListStoryPage extends StatelessWidget {
             }
             return Container();
           },
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: const Icon(Icons.add_a_photo),
         ),
       ),
     );

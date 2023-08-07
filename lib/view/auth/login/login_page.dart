@@ -1,8 +1,13 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:dicogram/router_v2.dart';
 import 'package:dicogram/utils/text_styles.dart';
+import 'package:dicogram/view/auth/login/bloc/login_bloc.dart';
 import 'package:dicogram/widget/text_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 
+@RoutePage()
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -61,22 +66,37 @@ class _LoginPageState extends State<LoginPage> {
                   },
                 ),
                 const SizedBox(height: 24.0),
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    decoration: BoxDecoration(
-                      color: Colors.deepPurple,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Login',
-                        style: TextStyles.body.copyWith(color: Colors.white),
+                BlocConsumer<LoginBloc, LoginState>(
+                  listener: (context, state) {
+                    if (state is LoginSuccess) {
+                      if (state.isLogin) {
+                        context.replaceRoute(const ListStoryRoute());
+                      }
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is LoginLoding) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    return GestureDetector(
+                      onTap: () => context.read<LoginBloc>()..add(Login()),
+                      child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        decoration: BoxDecoration(
+                          color: Colors.deepPurple,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Login',
+                            style:
+                                TextStyles.body.copyWith(color: Colors.white),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
                 const SizedBox(height: 24.0),
                 Text(
@@ -84,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyles.body,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () => context.pushRoute(const RegisterRoute()),
                   child: Text(
                     'Register Now',
                     style: TextStyles.body.copyWith(
