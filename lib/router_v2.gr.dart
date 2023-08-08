@@ -15,6 +15,22 @@ abstract class _$RouterV2 extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    AddStoryRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AddStoryPage(),
+      );
+    },
+    CameraRoute.name: (routeData) {
+      final args = routeData.argsAs<CameraRouteArgs>();
+      return AutoRoutePage<XFile>(
+        routeData: routeData,
+        child: CameraPage(
+          key: args.key,
+          cameras: args.cameras,
+        ),
+      );
+    },
     DetailRoute.name: (routeData) {
       final args = routeData.argsAs<DetailRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -50,6 +66,57 @@ abstract class _$RouterV2 extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [AddStoryPage]
+class AddStoryRoute extends PageRouteInfo<void> {
+  const AddStoryRoute({List<PageRouteInfo>? children})
+      : super(
+          AddStoryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AddStoryRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CameraPage]
+class CameraRoute extends PageRouteInfo<CameraRouteArgs> {
+  CameraRoute({
+    Key? key,
+    required List<CameraDescription> cameras,
+    List<PageRouteInfo>? children,
+  }) : super(
+          CameraRoute.name,
+          args: CameraRouteArgs(
+            key: key,
+            cameras: cameras,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'CameraRoute';
+
+  static const PageInfo<CameraRouteArgs> page = PageInfo<CameraRouteArgs>(name);
+}
+
+class CameraRouteArgs {
+  const CameraRouteArgs({
+    this.key,
+    required this.cameras,
+  });
+
+  final Key? key;
+
+  final List<CameraDescription> cameras;
+
+  @override
+  String toString() {
+    return 'CameraRouteArgs{key: $key, cameras: $cameras}';
+  }
 }
 
 /// generated route for

@@ -1,4 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:camera/camera.dart';
+import 'package:dicogram/view/add/add_story_page.dart';
+import 'package:dicogram/view/add/camera_page.dart';
 import 'package:dicogram/view/auth/login/login_page.dart';
 import 'package:dicogram/view/auth/register/register_page.dart';
 import 'package:dicogram/view/detail/detail_page.dart';
@@ -16,5 +19,7 @@ class RouterV2 extends _$RouterV2 {
         AutoRoute(page: RegisterRoute.page),
         AutoRoute(page: ListStoryRoute.page),
         AutoRoute(page: DetailRoute.page),
+        AutoRoute(page: AddStoryRoute.page),
+        AutoRoute(page: CameraRoute.page)
       ];
 }

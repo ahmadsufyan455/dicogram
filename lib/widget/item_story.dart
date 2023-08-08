@@ -69,7 +69,11 @@ class ItemStory extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 ),
               ),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
+              errorWidget: (context, url, error) => Icon(
+                Icons.error,
+                size: 100,
+                color: Colors.red.shade300,
+              ),
               width: double.infinity,
               height: 300,
               fit: BoxFit.cover,

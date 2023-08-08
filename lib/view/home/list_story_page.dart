@@ -91,8 +91,8 @@ class ListStoryPage extends StatelessWidget {
           },
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(Icons.add_a_photo),
+          onPressed: () => context.pushRoute(const AddStoryRoute()),
+          child: const Icon(Icons.add_a_photo_rounded),
         ),
       ),
     );
