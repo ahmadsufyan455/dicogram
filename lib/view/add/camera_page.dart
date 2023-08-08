@@ -12,39 +12,34 @@ class CameraPage extends StatefulWidget {
   State<CameraPage> createState() => _CameraPageState();
 }
 
-class _CameraPageState extends State<CameraPage> {
+class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
+  bool isBackCameraSelected = true;
   bool isCameraInitialized = false;
   CameraController? controller;
 
-  void onNewCameraSelected(CameraDescription cameraDescription) async {
-    final previousCameraController = controller;
-    final cameraController = CameraController(
-      cameraDescription,
-      ResolutionPreset.medium,
-    );
-    await previousCameraController?.dispose();
-    try {
-      await cameraController.initialize();
-    } on CameraException catch (e) {
-      throw 'Error initializing camera: $e';
-    }
-
-    if (mounted) {
-      setState(() {
-        controller = cameraController;
-        isCameraInitialized = controller!.value.isInitialized;
-      });
-    }
-  }
-
   @override
   void initState() {
-    onNewCameraSelected(widget.cameras.first);
+    WidgetsBinding.instance.addObserver(this);
+    _onNewCameraSelected(widget.cameras.first);
     super.initState();
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final CameraController? cameraController = controller;
+    if (cameraController == null || !cameraController.value.isInitialized) {
+      return;
+    }
+    if (state == AppLifecycleState.inactive) {
+      cameraController.dispose();
+    } else if (state == AppLifecycleState.resumed) {
+      _onNewCameraSelected(cameraController.description);
+    }
+  }
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     controller?.dispose();
     super.dispose();
   }
@@ -102,5 +97,37 @@ class _CameraPageState extends State<CameraPage> {
     }
   }
 
-  void _onCameraSwitch() {}
+  void _onNewCameraSelected(CameraDescription cameraDescription) async {
+    final previousCameraController = controller;
+    final cameraController = CameraController(
+      cameraDescription,
+      ResolutionPreset.medium,
+    );
+    await previousCameraController?.dispose();
+    try {
+      await cameraController.initialize();
+    } on CameraException catch (e) {
+      throw 'Error initializing camera: $e';
+    }
+
+    if (mounted) {
+      setState(() {
+        controller = cameraController;
+        isCameraInitialized = controller!.value.isInitialized;
+      });
+    }
+  }
+
+  void _onCameraSwitch() {
+    if (widget.cameras.length == 1) return;
+    setState(() {
+      isCameraInitialized = false;
+    });
+    _onNewCameraSelected(
+      widget.cameras[isBackCameraSelected ? 1 : 0],
+    );
+    setState(() {
+      isBackCameraSelected = !isBackCameraSelected;
+    });
+  }
 }
