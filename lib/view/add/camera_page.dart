@@ -2,82 +2,79 @@ import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
 import 'package:dicogram/utils/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'cubit/camera_cubit.dart';
 
 @RoutePage<XFile>()
-class CameraPage extends StatefulWidget {
+class CameraPage extends StatelessWidget {
   final List<CameraDescription> cameras;
-  const CameraPage({super.key, required this.cameras});
+  const CameraPage({Key? key, required this.cameras}) : super(key: key);
 
   @override
-  State<CameraPage> createState() => _CameraPageState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => CameraCubit()..initializeCamera(cameras),
+      child: _CameraPageView(cameras: cameras),
+    );
+  }
 }
 
-class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
-  bool isBackCameraSelected = true;
-  bool isCameraInitialized = false;
-  CameraController? controller;
+class _CameraPageView extends StatefulWidget {
+  final List<CameraDescription> cameras;
+  const _CameraPageView({required this.cameras});
 
   @override
-  void initState() {
-    WidgetsBinding.instance.addObserver(this);
-    _onNewCameraSelected(widget.cameras.first);
-    super.initState();
-  }
+  State<_CameraPageView> createState() => _CameraPageViewState();
+}
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    final CameraController? cameraController = controller;
-    if (cameraController == null || !cameraController.value.isInitialized) {
-      return;
-    }
-    if (state == AppLifecycleState.inactive) {
-      cameraController.dispose();
-    } else if (state == AppLifecycleState.resumed) {
-      _onNewCameraSelected(cameraController.description);
-    }
-  }
-
+class _CameraPageViewState extends State<_CameraPageView>
+    with WidgetsBindingObserver {
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    controller?.dispose();
+    context.read<CameraCubit>().disposeCamera();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Take a Photo',
-          style: TextStyles.body.copyWith(fontSize: 20),
-        ),
-        backgroundColor: Colors.transparent,
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () => _onCameraSwitch(),
-            icon: const Icon(
-              Icons.switch_camera_rounded,
-              color: Colors.deepPurple,
+    return BlocBuilder<CameraCubit, CameraState>(
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(
+              'Take a Photo',
+              style: TextStyles.body.copyWith(fontSize: 20),
+            ),
+            backgroundColor: Colors.transparent,
+            centerTitle: true,
+            actions: [
+              IconButton(
+                onPressed: () =>
+                    context.read<CameraCubit>().switchCamera(widget.cameras),
+                icon: const Icon(
+                  Icons.switch_camera_rounded,
+                  color: Colors.deepPurple,
+                ),
+              ),
+            ],
+          ),
+          body: Center(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                state.isCameraInitialized
+                    ? CameraPreview(state.controller!)
+                    : const Center(child: CircularProgressIndicator()),
+                Align(
+                  alignment: const Alignment(0, 0.95),
+                  child: _actionWidget(),
+                )
+              ],
             ),
           ),
-        ],
-      ),
-      body: Center(
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            isCameraInitialized
-                ? CameraPreview(controller!)
-                : const Center(child: CircularProgressIndicator()),
-            Align(
-              alignment: const Alignment(0, 0.95),
-              child: _actionWidget(),
-            )
-          ],
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -91,43 +88,9 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
   }
 
   Future<void> _onCameraButtonClick() async {
-    final image = await controller?.takePicture();
-    if (context.mounted) {
+    final XFile? image = await context.read<CameraCubit>().takePicture();
+    if (image != null && context.mounted) {
       context.router.pop<XFile>(image);
     }
-  }
-
-  void _onNewCameraSelected(CameraDescription cameraDescription) async {
-    final previousCameraController = controller;
-    final cameraController = CameraController(
-      cameraDescription,
-      ResolutionPreset.medium,
-    );
-    await previousCameraController?.dispose();
-    try {
-      await cameraController.initialize();
-    } on CameraException catch (e) {
-      throw 'Error initializing camera: $e';
-    }
-
-    if (mounted) {
-      setState(() {
-        controller = cameraController;
-        isCameraInitialized = controller!.value.isInitialized;
-      });
-    }
-  }
-
-  void _onCameraSwitch() {
-    if (widget.cameras.length == 1) return;
-    setState(() {
-      isCameraInitialized = false;
-    });
-    _onNewCameraSelected(
-      widget.cameras[isBackCameraSelected ? 1 : 0],
-    );
-    setState(() {
-      isBackCameraSelected = !isBackCameraSelected;
-    });
   }
 }
