@@ -97,7 +97,10 @@ class AddStoryPage extends StatelessWidget {
                           ),
                         );
                       } else if (state is AddStorySuccess) {
-                        context.replaceRoute(const ListStoryRoute());
+                        context.router.pushAndPopUntil(
+                          const ListStoryRoute(),
+                          predicate: (route) => false,
+                        );
                       }
                     },
                     builder: (context, state) {
@@ -114,7 +117,10 @@ class AddStoryPage extends StatelessWidget {
                             final imageFile = File(imagePath);
                             final formData = RequestAddStory(
                               description: description,
-                              photo: MultipartFile.fromFileSync(imageFile.path),
+                              photo: MultipartFile.fromFileSync(
+                                imageFile.path,
+                                filename: 'dicogram image',
+                              ),
                             ).toFormData();
 
                             if (context.mounted) {

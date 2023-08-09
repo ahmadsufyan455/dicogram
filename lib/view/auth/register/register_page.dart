@@ -97,7 +97,10 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                         );
-                        context.replaceRoute(const LoginRoute());
+                        context.router.pushAndPopUntil(
+                          const LoginRoute(),
+                          predicate: (route) => false,
+                        );
                       } else if (state is RegisterError) {
                         showDialog(
                           context: context,
@@ -161,7 +164,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     style: TextStyles.body,
                   ),
                   GestureDetector(
-                    onTap: () => context.replaceRoute(const LoginRoute()),
+                    onTap: () => context.router.pushAndPopUntil(
+                      const LoginRoute(),
+                      predicate: (route) => false,
+                    ),
                     child: Text(
                       'Login Now',
                       style: TextStyles.body.copyWith(
