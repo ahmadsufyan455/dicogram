@@ -1,8 +1,10 @@
+import 'package:dicogram/data/model/add_story_model.dart';
 import 'package:dicogram/data/model/detail_model.dart';
 import 'package:dicogram/data/model/login_model.dart';
 import 'package:dicogram/data/model/register_model.dart';
 import 'package:dicogram/data/model/story_model.dart';
 import 'package:dicogram/data/source/remote_data_source.dart';
+import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StoryRepository {
@@ -45,6 +47,21 @@ class StoryRepository {
       endPoint: '/stories/$id',
       modelFromJson: (json) => DetailStory.fromJson(json),
       headers: {'Authorization': 'Bearer $token'},
+    );
+  }
+
+  Future<AddStoryModel> uploadStory(FormData data) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    return _dataSource.request(
+      endPoint: '/stories',
+      data: data,
+      modelFromJson: (json) => AddStoryModel.fromJson(json),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'multipart/form-data'
+      },
+      method: 'POST',
     );
   }
 }
