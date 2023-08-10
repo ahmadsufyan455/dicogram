@@ -1,0 +1,18 @@
+{
+    "login": "Masuk",
+    "registerNow": "Daftar Sekarang",
+    "dontHaveAccount": "Belum punya akun ?",
+    "fullName": "Nama Lengkap",
+    "register": "Daftar",
+    "alreadyHaveAccount": "Sudah punya akun ?",
+    "loginNow": "Masuk Sekarang",
+    "openCamera": "Buka Kamera",
+    "openGallery": "Buka Galeri",
+    "description": "Deskripsi cerita...",
+    "addStory": "Tambah Cerita",
+    "detailStory": "Detail Cerita",
+    "somethingWentWrong": "Terjadi kesalahan!",
+    "tryAgain": "Coba lagi",
+    "registerSuccess": "Berhasil daftar, Silahkan login dengan akun baru",
+    "takePhoto": "Ambil gambar"
+}

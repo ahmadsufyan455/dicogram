@@ -12,6 +12,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'bloc/add_story_bloc.dart';
 
@@ -21,12 +22,13 @@ class AddStoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final descriptionController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Add Story',
+          l10n!.addStory,
           style: TextStyles.body.copyWith(fontSize: 20),
         ),
         centerTitle: true,
@@ -49,14 +51,14 @@ class AddStoryPage extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () => _onCustomCameraView(context),
                     child: Text(
-                      'Open Camera',
+                      l10n.openCamera,
                       style: TextStyles.body,
                     ),
                   ),
                   ElevatedButton(
                     onPressed: () async => _onGalleryView(context),
                     child: Text(
-                      'Open Gallery',
+                      l10n.openGallery,
                       style: TextStyles.body,
                     ),
                   ),
@@ -68,7 +70,7 @@ class AddStoryPage extends StatelessWidget {
                   Expanded(
                     child: TextInput(
                       controller: descriptionController,
-                      hint: 'Story description...',
+                      hint: l10n.description,
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -79,7 +81,7 @@ class AddStoryPage extends StatelessWidget {
                           context: context,
                           builder: (context) => AlertDialog(
                             title: Text(
-                              'Something went wrong!',
+                              l10n.somethingWentWrong,
                               style: TextStyles.title,
                             ),
                             content: Text(state.error, style: TextStyles.body),
@@ -87,7 +89,7 @@ class AddStoryPage extends StatelessWidget {
                               TextButton(
                                 onPressed: () => context.router.pop(),
                                 child: Text(
-                                  'Try Again',
+                                  l10n.tryAgain,
                                   style: TextStyles.body.copyWith(
                                     color: Colors.deepPurple,
                                   ),

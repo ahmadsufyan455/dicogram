@@ -4,6 +4,7 @@ import 'package:dicogram/data/source/remote_data_source.dart';
 import 'package:dicogram/data/source/story_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../utils/helper.dart';
 import '../../utils/text_styles.dart';
@@ -16,6 +17,7 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return BlocProvider(
       create: (context) =>
           DetailStoryBloc(StoryRepository(RemoteDataSourceImpl()))
@@ -23,7 +25,7 @@ class DetailPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Detail Story',
+            l10n!.detailStory,
             style: TextStyles.body.copyWith(fontSize: 20),
           ),
           centerTitle: true,

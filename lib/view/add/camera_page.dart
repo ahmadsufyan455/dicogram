@@ -3,6 +3,7 @@ import 'package:camera/camera.dart';
 import 'package:dicogram/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'cubit/camera_cubit.dart';
 
@@ -38,12 +39,13 @@ class _CameraPageViewState extends State<_CameraPageView>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return BlocBuilder<CameraCubit, CameraState>(
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
             title: Text(
-              'Take a Photo',
+              l10n!.takePhoto,
               style: TextStyles.body.copyWith(fontSize: 20),
             ),
             backgroundColor: Colors.transparent,
@@ -80,8 +82,6 @@ class _CameraPageViewState extends State<_CameraPageView>
 
   Widget _actionWidget() {
     return FloatingActionButton(
-      heroTag: "take-picture",
-      tooltip: "Ambil Gambar",
       onPressed: () => _onCameraButtonClick(),
       child: const Icon(Icons.camera_alt),
     );

@@ -1,0 +1,18 @@
+{
+    "login": "Login",
+    "registerNow": "Register Now",
+    "dontHaveAccount": "Don'\t have an account ?",
+    "fullName": "Full Name",
+    "register": "Register",
+    "alreadyHaveAccount": "Already have an account ?",
+    "loginNow": "Login Now",
+    "openCamera": "Open Camera",
+    "openGallery": "Open Gallery",
+    "description": "Story description...",
+    "addStory": "Add Story",
+    "detailStory": "Detail Story",
+    "somethingWentWrong": "Something went wrong!",
+    "tryAgain": "Try again",
+    "registerSuccess": "Register success, please login with new account",
+    "takePhoto": "Take a photo"
+}

@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dicogram/data/source/remote_data_source.dart';
 import 'package:dicogram/data/source/story_repository.dart';
+import 'package:dicogram/l10n/bloc/language_bloc.dart';
+import 'package:dicogram/l10n/lang.dart';
 import 'package:dicogram/router_v2.dart';
 import 'package:dicogram/utils/text_styles.dart';
 import 'package:dicogram/view/auth/login/bloc/login_bloc.dart';
@@ -27,6 +29,48 @@ class ListStoryPage extends StatelessWidget {
           ),
           centerTitle: true,
           actions: [
+            IconButton(
+              onPressed: () => showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return BlocBuilder<LanguageBloc, LanguageState>(
+                    builder: (context, state) {
+                      return ListView.separated(
+                        shrinkWrap: true,
+                        separatorBuilder: (context, index) => const Divider(
+                          height: 1,
+                          thickness: 1,
+                        ),
+                        itemCount: Language.values.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            onTap: () {
+                              context
+                                  .read<LanguageBloc>()
+                                  .add(ChangeLanguage(Language.values[index]));
+                              Future.delayed(const Duration(seconds: 300));
+                              context.router.pop();
+                            },
+                            title: Text(Language.values[index].label),
+                            trailing:
+                                Language.values[index] == state.selectedLanguage
+                                    ? const Icon(
+                                        Icons.check_rounded,
+                                        color: Colors.deepPurple,
+                                      )
+                                    : null,
+                          );
+                        },
+                      );
+                    },
+                  );
+                },
+              ),
+              icon: const Icon(
+                Icons.translate_rounded,
+                color: Colors.deepPurple,
+              ),
+            ),
             BlocListener<LoginBloc, LoginState>(
               listener: (context, state) {
                 if (state is LoginSuccess) {

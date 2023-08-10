@@ -7,6 +7,7 @@ import 'package:dicogram/widget/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @RoutePage()
 class LoginPage extends StatefulWidget {
@@ -30,10 +31,11 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Login',
+          l10n!.login,
           style: TextStyles.body.copyWith(fontSize: 20.0),
         ),
         centerTitle: true,
@@ -76,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                         context: context,
                         builder: (context) => AlertDialog(
                           title: Text(
-                            'Something went wrong!',
+                            l10n.somethingWentWrong,
                             style: TextStyles.title,
                           ),
                           content: Text(state.error, style: TextStyles.body),
@@ -84,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                             TextButton(
                               onPressed: () => context.router.pop(),
                               child: Text(
-                                'Try Again',
+                                l10n.tryAgain,
                                 style: TextStyles.body.copyWith(
                                   color: Colors.deepPurple,
                                 ),
@@ -116,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         child: Center(
                           child: Text(
-                            'Login',
+                            l10n.login,
                             style:
                                 TextStyles.body.copyWith(color: Colors.white),
                           ),
@@ -127,13 +129,13 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 24.0),
                 Text(
-                  'Don\'t have an account ?',
+                  l10n.dontHaveAccount,
                   style: TextStyles.body,
                 ),
                 GestureDetector(
                   onTap: () => context.pushRoute(const RegisterRoute()),
                   child: Text(
-                    'Register Now',
+                    l10n.registerNow,
                     style: TextStyles.body.copyWith(
                       color: Colors.deepPurple,
                       fontWeight: FontWeight.w700,

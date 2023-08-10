@@ -9,6 +9,7 @@ import 'package:dicogram/widget/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @RoutePage()
 class RegisterPage extends StatefulWidget {
@@ -39,13 +40,14 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return BlocProvider(
       create: (context) =>
           RegisterBloc(StoryRepository(RemoteDataSourceImpl())),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Register',
+            l10n!.register,
             style: TextStyles.body.copyWith(fontSize: 20.0),
           ),
           centerTitle: true,
@@ -61,7 +63,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   const SizedBox(height: 24.0),
                   TextInput(
                     controller: fullNameController,
-                    hint: 'Full Name',
+                    hint: l10n.fullName,
                     textInputType: TextInputType.name,
                     textInputAction: TextInputAction.next,
                   ),
@@ -91,9 +93,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     listener: (context, state) {
                       if (state is RegisterSuccess) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
+                          SnackBar(
                             content: Text(
-                              'Register success, please login with new account',
+                              l10n.registerSuccess,
                             ),
                           ),
                         );
@@ -106,7 +108,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           context: context,
                           builder: (context) => AlertDialog(
                             title: Text(
-                              'Something went wrong!',
+                              l10n.somethingWentWrong,
                               style: TextStyles.title,
                             ),
                             content: Text(state.error, style: TextStyles.body),
@@ -114,7 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               TextButton(
                                 onPressed: () => context.router.pop(),
                                 child: Text(
-                                  'Try Again',
+                                  l10n.tryAgain,
                                   style: TextStyles.body.copyWith(
                                     color: Colors.deepPurple,
                                   ),
@@ -149,7 +151,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           child: Center(
                             child: Text(
-                              'Register',
+                              l10n.register,
                               style:
                                   TextStyles.body.copyWith(color: Colors.white),
                             ),
@@ -160,7 +162,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   const SizedBox(height: 24.0),
                   Text(
-                    'Already have an account ?',
+                    l10n.alreadyHaveAccount,
                     style: TextStyles.body,
                   ),
                   GestureDetector(
@@ -169,7 +171,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       predicate: (route) => false,
                     ),
                     child: Text(
-                      'Login Now',
+                      l10n.loginNow,
                       style: TextStyles.body.copyWith(
                         color: Colors.deepPurple,
                         fontWeight: FontWeight.w700,
