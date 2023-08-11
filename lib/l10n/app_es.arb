@@ -1,0 +1,18 @@
+{
+    "login": "Ingresar",
+    "registerNow": "Regístrate ahora",
+    "dontHaveAccount": "¿Aún no tienes una cuenta?",
+    "fullName": "Nombre completo",
+    "register": "Lista",
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "loginNow": "Inicia sesión ahora",
+    "openCamera": "Cámara abierta",
+    "openGallery": "Abrir galería",
+    "description": "Descripción de la historia...",
+    "addStory": "Agregar historia",
+    "detailStory": "Detalles de la historia",
+    "somethingWentWrong": "¡Hay un error!",
+    "tryAgain": "Intentar otra vez",
+    "registerSuccess": "Registro exitoso, por favor inicie sesión con una nueva cuenta",
+    "takePhoto": "Tomar la foto"
+}

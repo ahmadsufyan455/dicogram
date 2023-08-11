@@ -51,6 +51,10 @@ class ListStoryPage extends StatelessWidget {
                               Future.delayed(const Duration(seconds: 300));
                               context.router.pop();
                             },
+                            leading: Image.asset(
+                              Language.values[index].logo,
+                              width: 30,
+                            ),
                             title: Text(Language.values[index].label),
                             trailing:
                                 Language.values[index] == state.selectedLanguage
