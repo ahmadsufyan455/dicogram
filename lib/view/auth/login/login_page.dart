@@ -3,6 +3,7 @@ import 'package:dicogram/data/model/login_model.dart';
 import 'package:dicogram/router_v2.dart';
 import 'package:dicogram/utils/text_styles.dart';
 import 'package:dicogram/view/auth/login/bloc/login_bloc.dart';
+import 'package:dicogram/widget/custom_button.dart';
 import 'package:dicogram/widget/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -101,7 +102,8 @@ class _LoginPageState extends State<LoginPage> {
                     if (state is LoginLoding) {
                       return const Center(child: CircularProgressIndicator());
                     }
-                    return GestureDetector(
+                    return CustomButton(
+                      label: l10n.login,
                       onTap: () {
                         final loginData = RequestLogin(
                           email: emailController.text,
@@ -109,21 +111,6 @@ class _LoginPageState extends State<LoginPage> {
                         ).toJson();
                         context.read<LoginBloc>().add(Login(loginData));
                       },
-                      child: Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(vertical: 16.0),
-                        decoration: BoxDecoration(
-                          color: Colors.deepPurple,
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Center(
-                          child: Text(
-                            l10n.login,
-                            style:
-                                TextStyles.body.copyWith(color: Colors.white),
-                          ),
-                        ),
-                      ),
                     );
                   },
                 ),

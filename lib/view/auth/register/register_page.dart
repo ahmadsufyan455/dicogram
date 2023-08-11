@@ -5,6 +5,7 @@ import 'package:dicogram/data/source/story_repository.dart';
 import 'package:dicogram/router_v2.dart';
 import 'package:dicogram/utils/text_styles.dart';
 import 'package:dicogram/view/auth/register/bloc/register_bloc.dart';
+import 'package:dicogram/widget/custom_button.dart';
 import 'package:dicogram/widget/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -131,7 +132,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       if (state is RegisterLoading) {
                         return const Center(child: CircularProgressIndicator());
                       }
-                      return GestureDetector(
+                      return CustomButton(
+                        label: l10n.register,
                         onTap: () {
                           final registerData = RequestRegister(
                             name: fullNameController.text,
@@ -142,21 +144,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               .read<RegisterBloc>()
                               .add(Register(registerData));
                         },
-                        child: Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(vertical: 16.0),
-                          decoration: BoxDecoration(
-                            color: Colors.deepPurple,
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Center(
-                            child: Text(
-                              l10n.register,
-                              style:
-                                  TextStyles.body.copyWith(color: Colors.white),
-                            ),
-                          ),
-                        ),
                       );
                     },
                   ),
