@@ -14,5 +14,6 @@
     "somethingWentWrong": "Terjadi kesalahan!",
     "tryAgain": "Coba lagi",
     "registerSuccess": "Berhasil daftar, Silahkan login dengan akun baru",
-    "takePhoto": "Ambil gambar"
+    "takePhoto": "Ambil gambar",
+    "dataNotComplete": "Gambar atau deskripsi harus di isi"
 }

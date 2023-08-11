@@ -130,6 +130,14 @@ class AddStoryPage extends StatelessWidget {
                                   .read<AddStoryBloc>()
                                   .add(AddStory(formData));
                             }
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  l10n.dataNotComplete,
+                                ),
+                              ),
+                            );
                           }
                         },
                         icon: const Icon(

@@ -14,5 +14,6 @@
     "somethingWentWrong": "Something went wrong!",
     "tryAgain": "Try again",
     "registerSuccess": "Register success, please login with new account",
-    "takePhoto": "Take a photo"
+    "takePhoto": "Take a photo",
+    "dataNotComplete": "Image or description must be fill"
 }

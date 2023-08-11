@@ -14,5 +14,6 @@
     "somethingWentWrong": "¡Hay un error!",
     "tryAgain": "Intentar otra vez",
     "registerSuccess": "Registro exitoso, por favor inicie sesión con una nueva cuenta",
-    "takePhoto": "Tomar la foto"
+    "takePhoto": "Tomar la foto",
+    "dataNotComplete": "La imagen o la descripción deben completarse"
 }
