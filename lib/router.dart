@@ -1,7 +1,7 @@
-import 'package:dicogram/view/auth/login/login_page.dart';
-import 'package:dicogram/view/auth/register/register_page.dart';
-import 'package:dicogram/view/home/list_story_page.dart';
-import 'package:dicogram/view/splash_page.dart';
+import 'package:dicogram/presentation/pages/auth/login/login_page.dart';
+import 'package:dicogram/presentation/pages/auth/register/register_page.dart';
+import 'package:dicogram/presentation/pages/home/list_story_page.dart';
+import 'package:dicogram/presentation/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

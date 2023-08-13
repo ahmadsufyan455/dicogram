@@ -1,13 +1,12 @@
-class RegisterModel {
-  bool? error;
-  String? message;
+import 'package:dicogram/domain/entity/register_entity.dart';
+import 'package:equatable/equatable.dart';
 
-  RegisterModel({this.error, this.message});
+class RegisterModel extends RegisterEntity with EquatableMixin {
+  RegisterModel({required bool error, required String message})
+      : super(error: error, message: message);
 
-  RegisterModel.fromJson(Map<String, dynamic> json) {
-    error = json['error'];
-    message = json['message'];
-  }
+  factory RegisterModel.fromJson(Map<String, dynamic> json) =>
+      RegisterModel(error: json['error'], message: json['message']);
 }
 
 class RequestRegister {

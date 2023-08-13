@@ -1,29 +1,33 @@
-class LoginModel {
-  bool? error;
-  String? message;
-  LoginResult? loginResult;
+import 'package:dicogram/domain/entity/login_entity.dart';
+import 'package:equatable/equatable.dart';
 
-  LoginModel({this.error, this.message, this.loginResult});
+class LoginModel extends LoginEntity with EquatableMixin {
+  LoginModel({
+    required bool error,
+    required String message,
+    required LoginResultModel loginResult,
+  }) : super(error: error, message: message, loginResult: loginResult);
 
-  LoginModel.fromJson(Map<String, dynamic> json) {
-    error = json['error'];
-    message = json['message'];
-    loginResult = LoginResult.fromJson(json['loginResult']);
-  }
+  factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
+        error: json['error'],
+        message: json['message'],
+        loginResult: LoginResultModel.fromJson(json['loginResult']),
+      );
 }
 
-class LoginResult {
-  String? userId;
-  String? name;
-  String? token;
+class LoginResultModel extends LoginResultEntity with EquatableMixin {
+  LoginResultModel({
+    required String userId,
+    required String name,
+    required String token,
+  }) : super(userId: userId, name: name, token: token);
 
-  LoginResult({this.userId, this.name, this.token});
-
-  LoginResult.fromJson(Map<String, dynamic> json) {
-    userId = json['userId'];
-    name = json['name'];
-    token = json['token'];
-  }
+  factory LoginResultModel.fromJson(Map<String, dynamic> json) =>
+      LoginResultModel(
+        userId: json['userId'],
+        name: json['name'],
+        token: json['token'],
+      );
 }
 
 class RequestLogin {
