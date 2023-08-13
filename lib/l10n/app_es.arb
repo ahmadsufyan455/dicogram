@@ -15,5 +15,29 @@
     "tryAgain": "Intentar otra vez",
     "registerSuccess": "Registro exitoso, por favor inicie sesión con una nueva cuenta",
     "takePhoto": "Tomar la foto",
-    "dataNotComplete": "La imagen o la descripción deben completarse"
+    "dataNotComplete": "La imagen o la descripción deben completarse",
+    "hoursAgo": "{hours} horas atras",
+    "@hoursAgo": {
+        "placeholders": {
+            "hours": {
+            "type": "String"
+            }
+        }
+    },
+    "minutesAgo": "{minutes} hace minutos",
+    "@minutesAgo": {
+        "placeholders": {
+            "minutes": {
+            "type": "String"
+            }
+        }
+    },
+    "secondsAgo": "{seconds} hace segundos",
+    "@secondsAgo": {
+        "placeholders": {
+            "seconds": {
+            "type": "String"
+            }
+        }
+    }
 }

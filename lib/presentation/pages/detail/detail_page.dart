@@ -63,7 +63,7 @@ class DetailPage extends StatelessWidget {
                       Text(story.description, style: TextStyles.body),
                       const SizedBox(height: 4),
                       Text(
-                        Helper.formatTimestamp(story.createdAt),
+                        Helper.formatTimestamp(context, story.createdAt),
                         style: TextStyles.subtitle.copyWith(
                           color: Colors.black54,
                         ),

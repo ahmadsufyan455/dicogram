@@ -86,7 +86,7 @@ class ItemStory extends StatelessWidget {
           ),
           const SizedBox(height: 4.0),
           Text(
-            Helper.formatTimestamp(createdAt),
+            Helper.formatTimestamp(context, createdAt),
             style: TextStyles.subtitle.copyWith(color: Colors.black54),
           ),
         ],

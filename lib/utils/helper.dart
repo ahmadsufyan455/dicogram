@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Helper {
   static Future<String?> getCity(
@@ -14,18 +16,18 @@ class Helper {
     return placemarks[0].locality;
   }
 
-  static String formatTimestamp(String timestamp) {
+  static String formatTimestamp(BuildContext context, String timestamp) {
     DateTime dateTime = DateTime.parse(timestamp);
     Duration timeAgo = DateTime.now().toUtc().difference(dateTime);
 
     if (timeAgo.inDays > 0) {
       return DateFormat('MMM d').format(dateTime);
     } else if (timeAgo.inHours > 0) {
-      return '${timeAgo.inHours} hours ago';
+      return AppLocalizations.of(context)!.hoursAgo('${timeAgo.inHours}');
     } else if (timeAgo.inMinutes > 0) {
-      return '${timeAgo.inMinutes} minutes ago';
+      return AppLocalizations.of(context)!.minutesAgo('${timeAgo.inMinutes}');
     } else {
-      return '${timeAgo.inSeconds} seconds ago';
+      return AppLocalizations.of(context)!.secondsAgo('${timeAgo.inSeconds}');
     }
   }
 }

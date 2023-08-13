@@ -15,5 +15,29 @@
     "tryAgain": "Coba lagi",
     "registerSuccess": "Berhasil daftar, Silahkan login dengan akun baru",
     "takePhoto": "Ambil gambar",
-    "dataNotComplete": "Gambar atau deskripsi harus di isi"
+    "dataNotComplete": "Gambar atau deskripsi harus di isi",
+    "hoursAgo": "{hours} jam yang lalu",
+    "@hoursAgo": {
+        "placeholders": {
+            "hours": {
+            "type": "String"
+            }
+        }
+    },
+    "minutesAgo": "{minutes} menit yang lalu",
+    "@minutesAgo": {
+        "placeholders": {
+            "minutes": {
+            "type": "String"
+            }
+        }
+    },
+    "secondsAgo": "{seconds} detik yang lalu",
+    "@secondsAgo": {
+        "placeholders": {
+            "seconds": {
+            "type": "String"
+            }
+        }
+    }
 }
