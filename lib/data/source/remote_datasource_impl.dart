@@ -1,9 +1,9 @@
 import 'package:dicogram/data/source/remote_datasource.dart';
-import 'package:dicogram/utils/constants.dart';
 import 'package:dio/dio.dart';
 
 class RemoteDataSourceImpl implements RemoteDataSource {
-  final Dio _dio = Dio(BaseOptions(baseUrl: baseURL));
+  final Dio dio;
+  RemoteDataSourceImpl({required this.dio});
 
   @override
   Future<T> request<T>({
@@ -14,7 +14,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     String method = 'GET',
   }) async {
     try {
-      final response = await _dio.request(
+      final response = await dio.request(
         endPoint,
         data: data,
         options: Options(method: method, headers: headers),

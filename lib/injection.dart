@@ -19,9 +19,11 @@ import 'package:dicogram/presentation/pages/auth/login/bloc/login_bloc.dart';
 import 'package:dicogram/presentation/pages/auth/register/bloc/register_bloc.dart';
 import 'package:dicogram/presentation/pages/detail/bloc/detail_story_bloc.dart';
 import 'package:dicogram/presentation/pages/home/bloc/story_bloc.dart';
+import 'package:dicogram/utils/constants.dart';
 import 'package:get_it/get_it.dart';
 
 import 'data/source/remote_datasource.dart';
+import 'package:dio/dio.dart';
 
 final serviceLocator = GetIt.I;
 
@@ -62,6 +64,9 @@ Future<void> init() async {
   serviceLocator.registerFactory<AddStoryRepository>(
       () => AddStoryRepositoryImpl(remoteDataSource: serviceLocator()));
 
-  serviceLocator
-      .registerFactory<RemoteDataSource>(() => RemoteDataSourceImpl());
+  serviceLocator.registerFactory<RemoteDataSource>(
+      () => RemoteDataSourceImpl(dio: serviceLocator()));
+
+  // ! external
+  serviceLocator.registerFactory(() => Dio(BaseOptions(baseUrl: baseURL)));
 }
