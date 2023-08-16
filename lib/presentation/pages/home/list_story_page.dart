@@ -7,6 +7,7 @@ import 'package:dicogram/utils/text_styles.dart';
 import 'package:dicogram/presentation/widget/item_story.dart';
 import 'package:dicogram/presentation/widget/loading_shimmer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../auth/login/bloc/login_bloc.dart';
 import 'bloc/story_bloc.dart';
@@ -121,7 +122,7 @@ class ListStoryPage extends StatelessWidget {
                       lat: story.lat,
                       lon: story.lon,
                       createdAt: story.createdAt,
-                    ),
+                    ).animate().fade(duration: 500.ms).scale(duration: 500.ms),
                   );
                 },
               );
