@@ -8,11 +8,11 @@ sealed class LoginState extends Equatable {
   List<Object> get props => [];
 }
 
-class LoginInitial extends LoginState {}
+final class LoginInitial extends LoginState {}
 
-class LoginLoding extends LoginState {}
+final class LoginLoding extends LoginState {}
 
-class LoginSuccess extends LoginState {
+final class LoginSuccess extends LoginState {
   final String? token;
   const LoginSuccess({this.token});
 
@@ -20,7 +20,7 @@ class LoginSuccess extends LoginState {
   List<Object> get props => [token!];
 }
 
-class LoginError extends LoginState {
+final class LoginError extends LoginState {
   final String error;
   const LoginError(this.error);
 

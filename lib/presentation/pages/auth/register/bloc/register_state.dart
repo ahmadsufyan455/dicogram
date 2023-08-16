@@ -1,5 +1,6 @@
 part of 'register_bloc.dart';
 
+@immutable
 sealed class RegisterState extends Equatable {
   const RegisterState();
 
@@ -16,4 +17,7 @@ final class RegisterSuccess extends RegisterState {}
 final class RegisterError extends RegisterState {
   final String error;
   const RegisterError(this.error);
+
+  @override
+  List<Object> get props => [error];
 }

@@ -11,4 +11,7 @@ sealed class RegisterEvent extends Equatable {
 final class Register extends RegisterEvent {
   final Map<String, dynamic> data;
   const Register(this.data);
+
+  @override
+  List<Object> get props => [data];
 }

@@ -11,4 +11,7 @@ sealed class DetailStoryEvent extends Equatable {
 final class LoadDetailStory extends DetailStoryEvent {
   final String id;
   const LoadDetailStory(this.id);
+
+  @override
+  List<Object> get props => [id];
 }

@@ -11,4 +11,7 @@ sealed class AddStoryEvent extends Equatable {
 final class AddStory extends AddStoryEvent {
   final FormData data;
   const AddStory(this.data);
+
+  @override
+  List<Object> get props => [data];
 }

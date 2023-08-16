@@ -8,7 +8,7 @@ sealed class LoginEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class Login extends LoginEvent {
+final class Login extends LoginEvent {
   final Map<String, dynamic> data;
   const Login(this.data);
 
@@ -16,6 +16,6 @@ class Login extends LoginEvent {
   List<Object> get props => [data];
 }
 
-class Logout extends LoginEvent {}
+final class Logout extends LoginEvent {}
 
-class GetUser extends LoginEvent {}
+final class GetUser extends LoginEvent {}

@@ -1,5 +1,6 @@
 part of 'add_story_bloc.dart';
 
+@immutable
 sealed class AddStoryState extends Equatable {
   const AddStoryState();
 
@@ -16,4 +17,7 @@ final class AddStorySuccess extends AddStoryState {}
 final class AddStoryError extends AddStoryState {
   final String error;
   const AddStoryError(this.error);
+
+  @override
+  List<Object> get props => [error];
 }
