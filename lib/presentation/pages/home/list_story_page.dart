@@ -11,6 +11,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../auth/login/bloc/login_bloc.dart';
 import 'bloc/story_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @RoutePage()
 class ListStoryPage extends StatelessWidget {
@@ -138,12 +139,22 @@ class ListStoryPage extends StatelessWidget {
                             .scale(duration: 500.ms),
                       );
                     } else {
-                      return const Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
+                      return state.hasReachedMax
+                          ? Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Text(
+                                  AppLocalizations.of(context)!.noData,
+                                  style: TextStyles.body,
+                                ),
+                              ),
+                            )
+                          : const Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
                     }
                   },
                 ),

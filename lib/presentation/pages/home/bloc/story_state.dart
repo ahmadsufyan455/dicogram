@@ -14,10 +14,11 @@ class StoryLoading extends StoryState {}
 
 class StoryLoaded extends StoryState {
   final List<StoryResultEntity> stories;
-  const StoryLoaded(this.stories);
+  final bool hasReachedMax;
+  const StoryLoaded(this.stories, this.hasReachedMax);
 
   @override
-  List<Object> get props => [stories];
+  List<Object> get props => [stories, hasReachedMax];
 }
 
 class StoryError extends StoryState {

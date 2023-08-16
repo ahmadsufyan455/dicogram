@@ -17,6 +17,7 @@
     "takePhoto": "Take a photo",
     "dataNotComplete": "Image or description must be fill",
     "hoursAgo": "{hours} hours ago",
+    "noData": "No more data",
     "@hoursAgo": {
         "placeholders": {
             "hours": {

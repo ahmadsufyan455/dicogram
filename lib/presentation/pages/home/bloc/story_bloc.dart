@@ -17,7 +17,7 @@ class StoryBloc extends Bloc<StoryEvent, StoryState> {
       emit(StoryLoading());
       try {
         final result = await storyUseCase.getStory(page);
-        emit(StoryLoaded(result.stories));
+        emit(StoryLoaded(result.stories, result.stories.isEmpty));
       } catch (e) {
         emit(StoryError(e.toString()));
       }
@@ -29,7 +29,7 @@ class StoryBloc extends Bloc<StoryEvent, StoryState> {
         final result = await storyUseCase.getStory(page);
         final currentState = state as StoryLoaded;
         final updatedStory = currentState.stories + result.stories;
-        emit(StoryLoaded(updatedStory));
+        emit(StoryLoaded(updatedStory, result.stories.isEmpty));
       } catch (e) {
         emit(StoryError(e.toString()));
       }
