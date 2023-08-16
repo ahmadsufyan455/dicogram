@@ -13,11 +13,17 @@ class StoryInitial extends StoryState {}
 class StoryLoading extends StoryState {}
 
 class StoryLoaded extends StoryState {
-  final StoryEntity story;
-  const StoryLoaded(this.story);
+  final List<StoryResultEntity> stories;
+  const StoryLoaded(this.stories);
+
+  @override
+  List<Object> get props => [stories];
 }
 
 class StoryError extends StoryState {
   final String error;
   const StoryError(this.error);
+
+  @override
+  List<Object> get props => [error];
 }

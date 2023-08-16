@@ -9,3 +9,5 @@ abstract class StoryEvent extends Equatable {
 }
 
 class LoadStory extends StoryEvent {}
+
+class LoadMoreStory extends StoryEvent {}

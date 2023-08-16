@@ -18,79 +18,79 @@ class ListStoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => serviceLocator<StoryBloc>()..add(LoadStory()),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Dicogram',
-            style: TextStyles.body.copyWith(fontSize: 20),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Dicogram',
+          style: TextStyles.body.copyWith(fontSize: 20),
+        ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () => showModalBottomSheet(
+              context: context,
+              builder: (context) {
+                return BlocBuilder<LanguageBloc, LanguageState>(
+                  builder: (context, state) {
+                    return ListView.separated(
+                      shrinkWrap: true,
+                      separatorBuilder: (context, index) => const Divider(
+                        height: 1,
+                        thickness: 1,
+                      ),
+                      itemCount: Language.values.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          onTap: () {
+                            context
+                                .read<LanguageBloc>()
+                                .add(ChangeLanguage(Language.values[index]));
+                            Future.delayed(const Duration(seconds: 300));
+                            context.router.pop();
+                          },
+                          leading: Image.asset(
+                            Language.values[index].logo,
+                            width: 30,
+                          ),
+                          title: Text(Language.values[index].label),
+                          trailing:
+                              Language.values[index] == state.selectedLanguage
+                                  ? const Icon(
+                                      Icons.check_rounded,
+                                      color: Colors.deepPurple,
+                                    )
+                                  : null,
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            ),
+            icon: const Icon(
+              Icons.translate_rounded,
+              color: Colors.deepPurple,
+            ),
           ),
-          centerTitle: true,
-          actions: [
-            IconButton(
-              onPressed: () => showModalBottomSheet(
-                context: context,
-                builder: (context) {
-                  return BlocBuilder<LanguageBloc, LanguageState>(
-                    builder: (context, state) {
-                      return ListView.separated(
-                        shrinkWrap: true,
-                        separatorBuilder: (context, index) => const Divider(
-                          height: 1,
-                          thickness: 1,
-                        ),
-                        itemCount: Language.values.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            onTap: () {
-                              context
-                                  .read<LanguageBloc>()
-                                  .add(ChangeLanguage(Language.values[index]));
-                              Future.delayed(const Duration(seconds: 300));
-                              context.router.pop();
-                            },
-                            leading: Image.asset(
-                              Language.values[index].logo,
-                              width: 30,
-                            ),
-                            title: Text(Language.values[index].label),
-                            trailing:
-                                Language.values[index] == state.selectedLanguage
-                                    ? const Icon(
-                                        Icons.check_rounded,
-                                        color: Colors.deepPurple,
-                                      )
-                                    : null,
-                          );
-                        },
-                      );
-                    },
-                  );
-                },
-              ),
+          BlocListener<LoginBloc, LoginState>(
+            listener: (context, state) {
+              if (state is LoginSuccess) {
+                context.replaceRoute(const LoginRoute());
+              }
+            },
+            child: IconButton(
+              onPressed: () => context.read<LoginBloc>().add(Logout()),
               icon: const Icon(
-                Icons.translate_rounded,
+                Icons.logout_rounded,
                 color: Colors.deepPurple,
               ),
             ),
-            BlocListener<LoginBloc, LoginState>(
-              listener: (context, state) {
-                if (state is LoginSuccess) {
-                  context.replaceRoute(const LoginRoute());
-                }
-              },
-              child: IconButton(
-                onPressed: () => context.read<LoginBloc>().add(Logout()),
-                icon: const Icon(
-                  Icons.logout_rounded,
-                  color: Colors.deepPurple,
-                ),
-              ),
-            ),
-          ],
-        ),
-        body: BlocBuilder<StoryBloc, StoryState>(
+          ),
+        ],
+      ),
+      body: BlocProvider(
+        create: (context) => serviceLocator<StoryBloc>()..add(LoadStory()),
+        child: BlocBuilder<StoryBloc, StoryState>(
           builder: (context, state) {
             if (state is StoryLoading) {
               return ListView.builder(
@@ -100,31 +100,53 @@ class ListStoryPage extends StatelessWidget {
                 },
               );
             } else if (state is StoryLoaded) {
-              final data = state.story.stories;
-              return ListView.separated(
-                separatorBuilder: (context, index) => const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Divider(
-                    thickness: 2,
-                  ),
-                ),
-                itemCount: data.length,
-                itemBuilder: (context, index) {
-                  final story = data[index];
-                  return GestureDetector(
-                    onTap: () => context.pushRoute(
-                      DetailRoute(id: story.id),
-                    ),
-                    child: ItemStory(
-                      name: story.name,
-                      photoUrl: story.photoUrl,
-                      description: story.description,
-                      lat: story.lat,
-                      lon: story.lon,
-                      createdAt: story.createdAt,
-                    ).animate().fade(duration: 500.ms).scale(duration: 500.ms),
-                  );
+              final data = state.stories;
+              return NotificationListener<ScrollNotification>(
+                onNotification: (scrollNotification) {
+                  if (scrollNotification is ScrollEndNotification &&
+                      scrollNotification.metrics.pixels >=
+                          scrollNotification.metrics.maxScrollExtent) {
+                    context.read<StoryBloc>().add(LoadMoreStory());
+                  }
+                  return false;
                 },
+                child: ListView.separated(
+                  separatorBuilder: (context, index) => const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Divider(
+                      thickness: 2,
+                    ),
+                  ),
+                  itemCount: data.length + 1,
+                  itemBuilder: (context, index) {
+                    if (index < data.length) {
+                      final story = data[index];
+                      return GestureDetector(
+                        onTap: () => context.pushRoute(
+                          DetailRoute(id: story.id),
+                        ),
+                        child: ItemStory(
+                          name: story.name,
+                          photoUrl: story.photoUrl,
+                          description: story.description,
+                          lat: story.lat,
+                          lon: story.lon,
+                          createdAt: story.createdAt,
+                        )
+                            .animate()
+                            .fade(duration: 500.ms)
+                            .scale(duration: 500.ms),
+                      );
+                    } else {
+                      return const Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+                  },
+                ),
               );
             } else if (state is StoryError) {
               return Center(
@@ -137,10 +159,10 @@ class ListStoryPage extends StatelessWidget {
             return Container();
           },
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => context.pushRoute(const AddStoryRoute()),
-          child: const Icon(Icons.add_a_photo_rounded),
-        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => context.pushRoute(const AddStoryRoute()),
+        child: const Icon(Icons.add_a_photo_rounded),
       ),
     );
   }

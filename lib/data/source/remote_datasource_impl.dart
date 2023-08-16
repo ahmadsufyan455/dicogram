@@ -10,6 +10,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     required String endPoint,
     required T Function(dynamic) modelFromJson,
     dynamic data,
+    Map<String, dynamic>? queryParameter,
     Map<String, dynamic>? headers,
     String method = 'GET',
   }) async {
@@ -17,6 +18,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       final response = await dio.request(
         endPoint,
         data: data,
+        queryParameters: queryParameter,
         options: Options(method: method, headers: headers),
       );
       return modelFromJson(response.data);

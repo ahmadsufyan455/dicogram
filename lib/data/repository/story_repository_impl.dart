@@ -10,12 +10,13 @@ class StoryRepositoryImpl implements StoryRepository {
   StoryRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<StoryEntity> getStory() async {
+  Future<StoryEntity> getStory(int page) async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
     return remoteDataSource.request(
       endPoint: '/stories',
       modelFromJson: (json) => StoryModel.fromJson(json),
+      queryParameter: {'page': page},
       headers: {'Authorization': 'Bearer $token'},
     );
   }
