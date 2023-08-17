@@ -1,13 +1,26 @@
-import 'package:dicogram/domain/entity/add_story_entity.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-class AddStoryModel extends AddStoryEntity with EquatableMixin {
-  AddStoryModel({required bool error, required String message})
-      : super(error: error, message: message);
+part 'add_story_model.g.dart';
+
+@JsonSerializable()
+class AddStoryModel extends Equatable {
+  final bool error;
+  final String message;
+
+  const AddStoryModel({
+    required this.error,
+    required this.message,
+  });
 
   factory AddStoryModel.fromJson(Map<String, dynamic> json) =>
-      AddStoryModel(error: json['error'], message: json['message']);
+      _$AddStoryModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AddStoryModelToJson(this);
+
+  @override
+  List<Object?> get props => [error, message];
 }
 
 class RequestAddStory {

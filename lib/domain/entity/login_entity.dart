@@ -1,3 +1,4 @@
+import 'package:dicogram/data/model/login/login_model.dart';
 import 'package:equatable/equatable.dart';
 
 class LoginEntity extends Equatable {
@@ -10,6 +11,21 @@ class LoginEntity extends Equatable {
     required this.message,
     required this.loginResult,
   });
+
+  factory LoginEntity.fromModel(LoginModel model) {
+    final login = model.loginResult;
+    final loginResultEntity = LoginResultEntity(
+      userId: login.userId,
+      name: login.name,
+      token: login.token,
+    );
+
+    return LoginEntity(
+      error: model.error,
+      message: model.message,
+      loginResult: loginResultEntity,
+    );
+  }
 
   @override
   List<Object?> get props => [error, message, loginResult];

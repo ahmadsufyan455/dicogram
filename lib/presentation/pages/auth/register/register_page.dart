@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:dicogram/data/model/register_model.dart';
+import 'package:dicogram/data/model/register/register_model.dart';
 import 'package:dicogram/injection.dart';
 import 'package:dicogram/router_v2.dart';
 import 'package:dicogram/utils/text_styles.dart';

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
-import 'package:dicogram/data/model/add_story_model.dart';
+import 'package:dicogram/data/model/add_story/add_story_model.dart';
 import 'package:dicogram/router_v2.dart';
 import 'package:dicogram/utils/text_styles.dart';
 import 'package:dicogram/presentation/widget/text_input.dart';

@@ -3,7 +3,7 @@ import 'package:dicogram/domain/repository/add_story_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../model/add_story_model.dart';
+import '../model/add_story/add_story_model.dart';
 import '../source/remote_datasource.dart';
 
 class AddStoryRepositoryImpl implements AddStoryRepository {
@@ -14,7 +14,7 @@ class AddStoryRepositoryImpl implements AddStoryRepository {
   Future<AddStoryEntity> addStory(FormData data) async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
-    return remoteDataSource.request(
+    final addStoryModel = await remoteDataSource.request(
       endPoint: '/stories',
       data: data,
       modelFromJson: (json) => AddStoryModel.fromJson(json),
@@ -24,5 +24,6 @@ class AddStoryRepositoryImpl implements AddStoryRepository {
       },
       method: 'POST',
     );
+    return AddStoryEntity.fromModel(addStoryModel);
   }
 }

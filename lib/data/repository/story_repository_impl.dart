@@ -1,4 +1,4 @@
-import 'package:dicogram/data/model/story_model.dart';
+import 'package:dicogram/data/model/story/story_model.dart';
 import 'package:dicogram/domain/entity/story_entity.dart';
 import 'package:dicogram/domain/repository/story_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,11 +13,12 @@ class StoryRepositoryImpl implements StoryRepository {
   Future<StoryEntity> getStory(int page) async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
-    return remoteDataSource.request(
+    final storyModel = await remoteDataSource.request(
       endPoint: '/stories',
       modelFromJson: (json) => StoryModel.fromJson(json),
       queryParameter: {'page': page},
       headers: {'Authorization': 'Bearer $token'},
     );
+    return StoryEntity.fromModel(storyModel);
   }
 }
