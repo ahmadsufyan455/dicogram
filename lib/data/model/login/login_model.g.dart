@@ -33,3 +33,14 @@ Map<String, dynamic> _$LoginResultModelToJson(LoginResultModel instance) =>
       'name': instance.name,
       'token': instance.token,
     };
+
+RequestLogin _$RequestLoginFromJson(Map<String, dynamic> json) => RequestLogin(
+      email: json['email'] as String,
+      password: json['password'] as String,
+    );
+
+Map<String, dynamic> _$RequestLoginToJson(RequestLogin instance) =>
+    <String, dynamic>{
+      'email': instance.email,
+      'password': instance.password,
+    };

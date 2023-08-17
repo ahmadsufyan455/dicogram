@@ -21,6 +21,7 @@ class RegisterModel extends Equatable {
   List<Object?> get props => [error, message];
 }
 
+@JsonSerializable()
 class RequestRegister {
   final String name;
   final String email;
@@ -32,9 +33,8 @@ class RequestRegister {
     required this.password,
   });
 
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'email': email,
-        'password': password,
-      };
+  factory RequestRegister.fromJson(Map<String, dynamic> json) =>
+      _$RequestRegisterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RequestRegisterToJson(this);
 }

@@ -46,14 +46,15 @@ class LoginResultModel extends Equatable {
   List<Object?> get props => [userId, name, token];
 }
 
+@JsonSerializable()
 class RequestLogin {
   final String email;
   final String password;
 
+  factory RequestLogin.fromJson(Map<String, dynamic> json) =>
+      _$RequestLoginFromJson(json);
+
   RequestLogin({required this.email, required this.password});
 
-  Map<String, dynamic> toJson() => {
-        'email': email,
-        'password': password,
-      };
+  Map<String, dynamic> toJson() => _$RequestLoginToJson(this);
 }

@@ -17,3 +17,17 @@ Map<String, dynamic> _$RegisterModelToJson(RegisterModel instance) =>
       'error': instance.error,
       'message': instance.message,
     };
+
+RequestRegister _$RequestRegisterFromJson(Map<String, dynamic> json) =>
+    RequestRegister(
+      name: json['name'] as String,
+      email: json['email'] as String,
+      password: json['password'] as String,
+    );
+
+Map<String, dynamic> _$RequestRegisterToJson(RequestRegister instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'email': instance.email,
+      'password': instance.password,
+    };
