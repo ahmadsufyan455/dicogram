@@ -1,7 +1,7 @@
 import 'package:dicogram/domain/repository/add_story_repository.dart';
 import 'package:dio/dio.dart';
 
-import '../entity/add_story_entity.dart';
+import '../entity/add_story/add_story_entity.dart';
 
 class AddStoryUseCase {
   final AddStoryRepository addStoryRepository;

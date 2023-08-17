@@ -1,4 +1,4 @@
-import 'package:dicogram/domain/entity/add_story_entity.dart';
+import 'package:dicogram/domain/entity/add_story/add_story_entity.dart';
 import 'package:dicogram/domain/repository/add_story_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';

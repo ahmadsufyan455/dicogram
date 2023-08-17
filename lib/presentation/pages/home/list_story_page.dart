@@ -9,7 +9,7 @@ import 'package:dicogram/presentation/widget/loading_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../domain/entity/story_entity.dart';
+import '../../../domain/entity/story/story_entity.dart';
 import '../auth/login/bloc/login_bloc.dart';
 import 'bloc/story_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

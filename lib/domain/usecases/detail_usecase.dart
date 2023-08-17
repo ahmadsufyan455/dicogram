@@ -1,4 +1,4 @@
-import 'package:dicogram/domain/entity/detail_entity.dart';
+import 'package:dicogram/domain/entity/detail/detail_entity.dart';
 import 'package:dicogram/domain/repository/detail_repository.dart';
 
 class DetailUseCase {

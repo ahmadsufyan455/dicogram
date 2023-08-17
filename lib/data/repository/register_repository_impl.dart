@@ -1,4 +1,4 @@
-import 'package:dicogram/domain/entity/register_entity.dart';
+import 'package:dicogram/domain/entity/register/register_entity.dart';
 import 'package:dicogram/domain/repository/register_repository.dart';
 
 import '../model/register/register_model.dart';

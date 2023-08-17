@@ -523,6 +523,8 @@ abstract class _$$_LoadedCopyWith<$Res> {
       __$$_LoadedCopyWithImpl<$Res>;
   @useResult
   $Res call({DetailEntity story});
+
+  $DetailEntityCopyWith<$Res> get story;
 }
 
 /// @nodoc
@@ -543,6 +545,14 @@ class __$$_LoadedCopyWithImpl<$Res>
           : story // ignore: cast_nullable_to_non_nullable
               as DetailEntity,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DetailEntityCopyWith<$Res> get story {
+    return $DetailEntityCopyWith<$Res>(_value.story, (value) {
+      return _then(_value.copyWith(story: value));
+    });
   }
 }
 

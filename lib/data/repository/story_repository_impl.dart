@@ -1,5 +1,5 @@
 import 'package:dicogram/data/model/story/story_model.dart';
-import 'package:dicogram/domain/entity/story_entity.dart';
+import 'package:dicogram/domain/entity/story/story_entity.dart';
 import 'package:dicogram/domain/repository/story_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

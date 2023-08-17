@@ -1,5 +1,5 @@
 import 'package:dicogram/data/model/login/login_model.dart';
-import 'package:dicogram/domain/entity/login_entity.dart';
+import 'package:dicogram/domain/entity/login/login_entity.dart';
 import 'package:dicogram/domain/repository/login_repository.dart';
 
 import '../source/remote_datasource.dart';

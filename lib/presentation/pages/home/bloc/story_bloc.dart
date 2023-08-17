@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../domain/entity/story_entity.dart';
+import '../../../../domain/entity/story/story_entity.dart';
 import '../../../../domain/usecases/story_usecase.dart';
 
 part 'story_bloc.freezed.dart';

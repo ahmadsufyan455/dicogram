@@ -1,4 +1,4 @@
-import 'package:dicogram/domain/entity/detail_entity.dart';
+import 'package:dicogram/domain/entity/detail/detail_entity.dart';
 import 'package:dicogram/domain/usecases/detail_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
