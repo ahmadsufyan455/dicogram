@@ -9,6 +9,7 @@ import 'package:dicogram/presentation/widget/loading_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../domain/entity/story_entity.dart';
 import '../auth/login/bloc/login_bloc.dart';
 import 'bloc/story_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -43,9 +44,11 @@ class ListStoryPage extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return ListTile(
                           onTap: () {
-                            context
-                                .read<LanguageBloc>()
-                                .add(ChangeLanguage(Language.values[index]));
+                            context.read<LanguageBloc>().add(
+                                  LanguageEvent.changeLanguage(
+                                    Language.values[index],
+                                  ),
+                                );
                             Future.delayed(const Duration(seconds: 300));
                             context.router.pop();
                           },
@@ -90,90 +93,103 @@ class ListStoryPage extends StatelessWidget {
         ],
       ),
       body: BlocProvider(
-        create: (context) => serviceLocator<StoryBloc>()..add(LoadStory()),
+        create: (context) =>
+            serviceLocator<StoryBloc>()..add(const StoryEvent.loadStory()),
         child: BlocBuilder<StoryBloc, StoryState>(
           builder: (context, state) {
-            if (state is StoryLoading) {
-              return ListView.builder(
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return const LoadingShimmer();
-                },
-              );
-            } else if (state is StoryLoaded) {
-              final data = state.stories;
-              return NotificationListener<ScrollNotification>(
-                onNotification: (scrollNotification) {
-                  if (scrollNotification is ScrollEndNotification &&
-                      scrollNotification.metrics.pixels >=
-                          scrollNotification.metrics.maxScrollExtent) {
-                    context.read<StoryBloc>().add(LoadMoreStory());
-                  }
-                  return false;
-                },
-                child: ListView.separated(
-                  separatorBuilder: (context, index) => const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Divider(
-                      thickness: 2,
-                    ),
-                  ),
-                  itemCount: data.length + 1,
-                  itemBuilder: (context, index) {
-                    if (index < data.length) {
-                      final story = data[index];
-                      return GestureDetector(
-                        onTap: () => context.pushRoute(
-                          DetailRoute(id: story.id),
-                        ),
-                        child: ItemStory(
-                          name: story.name,
-                          photoUrl: story.photoUrl,
-                          description: story.description,
-                          lat: story.lat,
-                          lon: story.lon,
-                          createdAt: story.createdAt,
-                        )
-                            .animate()
-                            .fade(duration: 500.ms)
-                            .scale(duration: 500.ms),
-                      );
-                    } else {
-                      return state.hasReachedMax
-                          ? Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Text(
-                                  AppLocalizations.of(context)!.noData,
-                                  style: TextStyles.body,
-                                ),
-                              ),
-                            )
-                          : const Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                            );
-                    }
-                  },
-                ),
-              );
-            } else if (state is StoryError) {
-              return Center(
-                child: Text(
-                  state.error,
-                  style: TextStyles.body,
-                ),
-              );
-            }
-            return Container();
+            return state.when(
+              intial: () => Container(),
+              loading: () => _showLoading(),
+              loaded: (stories, hasReachedMax) =>
+                  _showStories(context, stories, hasReachedMax),
+              error: (error) => _showError(error),
+            );
           },
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.pushRoute(const AddStoryRoute()),
         child: const Icon(Icons.add_a_photo_rounded),
+      ),
+    );
+  }
+
+  Widget _showLoading() {
+    return ListView.builder(
+      itemCount: 5,
+      itemBuilder: (context, index) {
+        return const LoadingShimmer();
+      },
+    );
+  }
+
+  Widget _showStories(BuildContext context, List<StoryResultEntity> stories,
+      bool hasReachedMax) {
+    final data = stories;
+    return NotificationListener<ScrollNotification>(
+      onNotification: (scrollNotification) {
+        if (scrollNotification is ScrollEndNotification &&
+            scrollNotification.metrics.pixels >=
+                scrollNotification.metrics.maxScrollExtent) {
+          context.read<StoryBloc>().add(const StoryEvent.loadMoreStory());
+        }
+        return false;
+      },
+      child: ListView.separated(
+        separatorBuilder: (context, index) => const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          child: Divider(
+            thickness: 2,
+          ),
+        ),
+        itemCount: data.length + 1,
+        itemBuilder: (context, index) {
+          if (index < data.length) {
+            final story = data[index];
+            return GestureDetector(
+              onTap: () => context.pushRoute(
+                DetailRoute(id: story.id),
+              ),
+              child: ItemStory(
+                name: story.name,
+                photoUrl: story.photoUrl,
+                description: story.description,
+                lat: story.lat,
+                lon: story.lon,
+                createdAt: story.createdAt,
+              ).animate().fade(duration: 500.ms).scale(duration: 500.ms),
+            );
+          } else {
+            return hasReachedMax
+                ? Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        AppLocalizations.of(context)!.noData,
+                        style: TextStyles.body,
+                      ),
+                    ),
+                  )
+                : const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _showError(String error) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Text(
+          error,
+          style: TextStyles.body,
+        ),
       ),
     );
   }

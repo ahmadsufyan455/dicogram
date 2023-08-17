@@ -1,29 +1,9 @@
 part of 'detail_story_bloc.dart';
 
-@immutable
-sealed class DetailStoryState extends Equatable {
-  const DetailStoryState();
-
-  @override
-  List<Object> get props => [];
-}
-
-final class DetailStoryInitial extends DetailStoryState {}
-
-final class DetailStoryLoading extends DetailStoryState {}
-
-final class DetailStoryLoaded extends DetailStoryState {
-  final DetailEntity story;
-  const DetailStoryLoaded(this.story);
-
-  @override
-  List<Object> get props => [story];
-}
-
-final class DetailStoryError extends DetailStoryState {
-  final String error;
-  const DetailStoryError(this.error);
-
-  @override
-  List<Object> get props => [error];
+@freezed
+class DetailStoryState with _$DetailStoryState {
+  const factory DetailStoryState.initial() = _Initial;
+  const factory DetailStoryState.loading() = _Loading;
+  const factory DetailStoryState.loaded(DetailEntity story) = _Loaded;
+  const factory DetailStoryState.error(String error) = _Error;
 }

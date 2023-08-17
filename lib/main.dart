@@ -31,7 +31,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<ImageCubit>(create: (context) => ImageCubit()),
         BlocProvider<LanguageBloc>(
-            create: (context) => LanguageBloc()..add(GetLanguage())),
+          create: (context) =>
+              LanguageBloc()..add(const LanguageEvent.getLanguage()),
+        ),
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {
