@@ -2,11 +2,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-part 'maps_state.dart';
-part 'maps_cubit.freezed.dart';
+part 'maps_detail_state.dart';
+part 'maps_detail_cubit.freezed.dart';
 
-class MapsCubit extends Cubit<MapsState> {
-  MapsCubit() : super(MapsState.initial());
+class MapsDetailCubit extends Cubit<MapsDetailState> {
+  MapsDetailCubit() : super(MapsDetailState.initial());
 
   void onMapCreated(
     GoogleMapController controller,

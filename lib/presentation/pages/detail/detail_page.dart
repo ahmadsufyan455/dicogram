@@ -10,7 +10,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../utils/helper.dart';
 import '../../../utils/text_styles.dart';
 import 'bloc/detail_story_bloc.dart';
-import 'cubit/maps_cubit.dart';
+import 'cubit/maps_detail_cubit.dart';
 
 @RoutePage()
 class DetailPage extends StatelessWidget {
@@ -55,7 +55,7 @@ class DetailPage extends StatelessWidget {
   }
 
   Widget _showDetail(BuildContext context, DetailResultEntity story) {
-    final mapsCubit = context.read<MapsCubit>();
+    final mapsCubit = context.read<MapsDetailCubit>();
     String? city;
     return Column(
       children: [
@@ -104,7 +104,7 @@ class DetailPage extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 24),
-              BlocBuilder<MapsCubit, MapsState>(
+              BlocBuilder<MapsDetailCubit, MapsDetailState>(
                 builder: (context, state) {
                   final center = LatLng(story.lat!, story.lon!);
                   return SizedBox(

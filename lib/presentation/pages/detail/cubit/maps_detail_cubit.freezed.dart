@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'maps_cubit.dart';
+part of 'maps_detail_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,20 +15,21 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$MapsState {
+mixin _$MapsDetailState {
   GoogleMapController? get mapController => throw _privateConstructorUsedError;
   Set<Marker> get markers => throw _privateConstructorUsedError;
   MapType get selectedMapType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $MapsStateCopyWith<MapsState> get copyWith =>
+  $MapsDetailStateCopyWith<MapsDetailState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MapsStateCopyWith<$Res> {
-  factory $MapsStateCopyWith(MapsState value, $Res Function(MapsState) then) =
-      _$MapsStateCopyWithImpl<$Res, MapsState>;
+abstract class $MapsDetailStateCopyWith<$Res> {
+  factory $MapsDetailStateCopyWith(
+          MapsDetailState value, $Res Function(MapsDetailState) then) =
+      _$MapsDetailStateCopyWithImpl<$Res, MapsDetailState>;
   @useResult
   $Res call(
       {GoogleMapController? mapController,
@@ -37,9 +38,9 @@ abstract class $MapsStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MapsStateCopyWithImpl<$Res, $Val extends MapsState>
-    implements $MapsStateCopyWith<$Res> {
-  _$MapsStateCopyWithImpl(this._value, this._then);
+class _$MapsDetailStateCopyWithImpl<$Res, $Val extends MapsDetailState>
+    implements $MapsDetailStateCopyWith<$Res> {
+  _$MapsDetailStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -71,7 +72,8 @@ class _$MapsStateCopyWithImpl<$Res, $Val extends MapsState>
 }
 
 /// @nodoc
-abstract class _$$_MapsStateCopyWith<$Res> implements $MapsStateCopyWith<$Res> {
+abstract class _$$_MapsStateCopyWith<$Res>
+    implements $MapsDetailStateCopyWith<$Res> {
   factory _$$_MapsStateCopyWith(
           _$_MapsState value, $Res Function(_$_MapsState) then) =
       __$$_MapsStateCopyWithImpl<$Res>;
@@ -85,7 +87,7 @@ abstract class _$$_MapsStateCopyWith<$Res> implements $MapsStateCopyWith<$Res> {
 
 /// @nodoc
 class __$$_MapsStateCopyWithImpl<$Res>
-    extends _$MapsStateCopyWithImpl<$Res, _$_MapsState>
+    extends _$MapsDetailStateCopyWithImpl<$Res, _$_MapsState>
     implements _$$_MapsStateCopyWith<$Res> {
   __$$_MapsStateCopyWithImpl(
       _$_MapsState _value, $Res Function(_$_MapsState) _then)
@@ -142,7 +144,7 @@ class _$_MapsState implements _MapsState {
 
   @override
   String toString() {
-    return 'MapsState(mapController: $mapController, markers: $markers, selectedMapType: $selectedMapType)';
+    return 'MapsDetailState(mapController: $mapController, markers: $markers, selectedMapType: $selectedMapType)';
   }
 
   @override
@@ -168,7 +170,7 @@ class _$_MapsState implements _MapsState {
       __$$_MapsStateCopyWithImpl<_$_MapsState>(this, _$identity);
 }
 
-abstract class _MapsState implements MapsState {
+abstract class _MapsState implements MapsDetailState {
   const factory _MapsState(
       {final GoogleMapController? mapController,
       final Set<Marker> markers,

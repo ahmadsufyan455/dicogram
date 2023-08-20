@@ -19,6 +19,7 @@ import 'package:dicogram/presentation/pages/auth/login/bloc/login_bloc.dart';
 import 'package:dicogram/presentation/pages/auth/register/bloc/register_bloc.dart';
 import 'package:dicogram/presentation/pages/detail/bloc/detail_story_bloc.dart';
 import 'package:dicogram/presentation/pages/home/bloc/story_bloc.dart';
+import 'package:dicogram/presentation/pages/maps/bloc/maps_bloc.dart';
 import 'package:dicogram/utils/constants.dart';
 import 'package:get_it/get_it.dart';
 
@@ -35,6 +36,8 @@ Future<void> init() async {
       .registerFactory(() => RegisterBloc(registerUsecase: serviceLocator()));
   serviceLocator
       .registerFactory(() => StoryBloc(storyUseCase: serviceLocator()));
+  serviceLocator
+      .registerFactory(() => MapsBloc(storyUseCase: serviceLocator()));
   serviceLocator
       .registerFactory(() => DetailStoryBloc(detailUseCase: serviceLocator()));
   serviceLocator

@@ -16,7 +16,7 @@ class StoryBloc extends Bloc<StoryEvent, StoryState> {
     on<_LoadStory>((event, emit) async {
       emit(const _Loading());
       try {
-        final result = await storyUseCase.getStory(page);
+        final result = await storyUseCase.getStory(page: page);
         emit(_Loaded(result.stories, result.stories.isEmpty));
       } catch (e) {
         emit(_Error(e.toString()));
@@ -26,7 +26,7 @@ class StoryBloc extends Bloc<StoryEvent, StoryState> {
     on<_LoadMoreStory>((event, emit) async {
       page++;
       try {
-        final result = await storyUseCase.getStory(page);
+        final result = await storyUseCase.getStory(page: page);
         final currentState = state as _Loaded;
         final updatedStory = currentState.stories + result.stories;
         emit(_Loaded(updatedStory, result.stories.isEmpty));

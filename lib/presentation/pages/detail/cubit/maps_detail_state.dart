@@ -1,12 +1,12 @@
-part of 'maps_cubit.dart';
+part of 'maps_detail_cubit.dart';
 
 @freezed
-class MapsState with _$MapsState {
-  const factory MapsState({
+class MapsDetailState with _$MapsDetailState {
+  const factory MapsDetailState({
     @Default(null) GoogleMapController? mapController,
     @Default({}) Set<Marker> markers,
     @Default(MapType.normal) MapType selectedMapType,
   }) = _MapsState;
 
-  factory MapsState.initial() => const MapsState();
+  factory MapsDetailState.initial() => const MapsDetailState();
 }

@@ -3,7 +3,7 @@ import 'package:dicogram/l10n/bloc/language_bloc.dart';
 import 'package:dicogram/presentation/pages/add/bloc/add_story_bloc.dart';
 import 'package:dicogram/presentation/pages/add/cubit/image_cubit.dart';
 import 'package:dicogram/presentation/pages/auth/login/bloc/login_bloc.dart';
-import 'package:dicogram/presentation/pages/detail/cubit/maps_cubit.dart';
+import 'package:dicogram/presentation/pages/detail/cubit/maps_detail_cubit.dart';
 import 'package:dicogram/router_v2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           create: (context) => serviceLocator<AddStoryBloc>(),
         ),
         BlocProvider<ImageCubit>(create: (context) => ImageCubit()),
-        BlocProvider<MapsCubit>(create: (context) => MapsCubit()),
+        BlocProvider<MapsDetailCubit>(create: (context) => MapsDetailCubit()),
         BlocProvider<LanguageBloc>(
           create: (context) =>
               LanguageBloc()..add(const LanguageEvent.getLanguage()),
