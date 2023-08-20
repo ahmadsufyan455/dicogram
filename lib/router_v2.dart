@@ -6,6 +6,7 @@ import 'package:dicogram/presentation/pages/auth/login/login_page.dart';
 import 'package:dicogram/presentation/pages/auth/register/register_page.dart';
 import 'package:dicogram/presentation/pages/detail/detail_page.dart';
 import 'package:dicogram/presentation/pages/home/list_story_page.dart';
+import 'package:dicogram/presentation/pages/profile/profile_page.dart';
 import 'package:dicogram/presentation/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 part 'router_v2.gr.dart';
@@ -20,6 +21,7 @@ class RouterV2 extends _$RouterV2 {
         AutoRoute(page: ListStoryRoute.page),
         AutoRoute(page: DetailRoute.page),
         AutoRoute(page: AddStoryRoute.page),
-        AutoRoute(page: CameraRoute.page)
+        AutoRoute(page: CameraRoute.page),
+        AutoRoute(page: ProfileRoute.page),
       ];
 }

@@ -18,6 +18,7 @@
     "dataNotComplete": "Gambar atau deskripsi harus di isi",
     "hoursAgo": "{hours} jam yang lalu",
     "noData": "Datanya udah abis",
+    "profile": "Profil",
     "@hoursAgo": {
         "placeholders": {
             "hours": {

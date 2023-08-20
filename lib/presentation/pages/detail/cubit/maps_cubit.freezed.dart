@@ -51,7 +51,7 @@ class _$MapsStateCopyWithImpl<$Res, $Val extends MapsState>
   $Res call({
     Object? mapController = freezed,
     Object? markers = null,
-    Object? selectedMapType = freezed,
+    Object? selectedMapType = null,
   }) {
     return _then(_value.copyWith(
       mapController: freezed == mapController
@@ -62,7 +62,7 @@ class _$MapsStateCopyWithImpl<$Res, $Val extends MapsState>
           ? _value.markers
           : markers // ignore: cast_nullable_to_non_nullable
               as Set<Marker>,
-      selectedMapType: freezed == selectedMapType
+      selectedMapType: null == selectedMapType
           ? _value.selectedMapType
           : selectedMapType // ignore: cast_nullable_to_non_nullable
               as MapType,
@@ -96,7 +96,7 @@ class __$$_MapsStateCopyWithImpl<$Res>
   $Res call({
     Object? mapController = freezed,
     Object? markers = null,
-    Object? selectedMapType = freezed,
+    Object? selectedMapType = null,
   }) {
     return _then(_$_MapsState(
       mapController: freezed == mapController
@@ -107,7 +107,7 @@ class __$$_MapsStateCopyWithImpl<$Res>
           ? _value._markers
           : markers // ignore: cast_nullable_to_non_nullable
               as Set<Marker>,
-      selectedMapType: freezed == selectedMapType
+      selectedMapType: null == selectedMapType
           ? _value.selectedMapType
           : selectedMapType // ignore: cast_nullable_to_non_nullable
               as MapType,
@@ -150,19 +150,16 @@ class _$_MapsState implements _MapsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MapsState &&
-            const DeepCollectionEquality()
-                .equals(other.mapController, mapController) &&
+            (identical(other.mapController, mapController) ||
+                other.mapController == mapController) &&
             const DeepCollectionEquality().equals(other._markers, _markers) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedMapType, selectedMapType));
+            (identical(other.selectedMapType, selectedMapType) ||
+                other.selectedMapType == selectedMapType));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(mapController),
-      const DeepCollectionEquality().hash(_markers),
-      const DeepCollectionEquality().hash(selectedMapType));
+  int get hashCode => Object.hash(runtimeType, mapController,
+      const DeepCollectionEquality().hash(_markers), selectedMapType);
 
   @JsonKey(ignore: true)
   @override

@@ -18,6 +18,7 @@
     "dataNotComplete": "La imagen o la descripción deben completarse",
     "hoursAgo": "{hours} horas atras",
     "noData": "No más datos",
+    "profile": "Perfil",
     "@hoursAgo": {
         "placeholders": {
             "hours": {

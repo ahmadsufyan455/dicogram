@@ -17,6 +17,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         final prefs = await SharedPreferences.getInstance();
         final result = await loginUseCase.login(event.data);
         prefs.setString('token', result.loginResult.token);
+        prefs.setString('full_name', result.loginResult.name);
         emit(const LoginSuccess());
       } catch (e) {
         emit(LoginError(e.toString()));
@@ -28,6 +29,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       try {
         final prefs = await SharedPreferences.getInstance();
         prefs.remove('token');
+        prefs.remove('full_name');
         emit(const LoginSuccess());
       } catch (e) {
         emit(LoginError(e.toString()));
