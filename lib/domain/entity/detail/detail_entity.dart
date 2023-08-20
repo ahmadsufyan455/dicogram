@@ -19,6 +19,8 @@ class DetailEntity with _$DetailEntity {
       description: detail.description,
       photoUrl: detail.photoUrl,
       createdAt: detail.createdAt,
+      lat: detail.lat,
+      lon: detail.lon,
     );
 
     return DetailEntity(

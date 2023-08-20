@@ -19,6 +19,8 @@ class StoryEntity with _$StoryEntity {
               description: storyResultModel.description,
               photoUrl: storyResultModel.photoUrl,
               createdAt: storyResultModel.createdAt,
+              lat: storyResultModel.lat,
+              lon: storyResultModel.lon,
             ))
         .toList();
     return StoryEntity(
