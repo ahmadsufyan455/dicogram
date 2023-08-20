@@ -8,7 +8,12 @@ part 'maps_cubit.freezed.dart';
 class MapsCubit extends Cubit<MapsState> {
   MapsCubit() : super(MapsState.initial());
 
-  void onMapCreated(GoogleMapController controller, double lat, double lon) {
+  void onMapCreated(
+    GoogleMapController controller,
+    double lat,
+    double lon,
+    String city,
+  ) {
     final center = LatLng(lat, lon);
     final marker = Marker(
       markerId: const MarkerId("dicogram"),
@@ -18,6 +23,7 @@ class MapsCubit extends Cubit<MapsState> {
           CameraUpdate.newLatLngZoom(center, 18),
         );
       },
+      infoWindow: InfoWindow(title: city),
     );
     emit(state.copyWith(mapController: controller, markers: {marker}));
   }

@@ -56,6 +56,7 @@ class DetailPage extends StatelessWidget {
 
   Widget _showDetail(BuildContext context, DetailResultEntity story) {
     final mapsCubit = context.read<MapsCubit>();
+    String? city;
     return Column(
       children: [
         ClipRRect(
@@ -95,8 +96,9 @@ class DetailPage extends StatelessWidget {
               FutureBuilder<String?>(
                 future: Helper.getCity(story.lat!, story.lon!),
                 builder: (context, snapshot) {
+                  city = snapshot.data;
                   return Text(
-                    snapshot.data ?? 'Unknown',
+                    city ?? 'Unknown',
                     style: TextStyles.subtitle,
                   );
                 },
@@ -124,6 +126,7 @@ class DetailPage extends StatelessWidget {
                               controller,
                               story.lat!,
                               story.lon!,
+                              city!,
                             ),
                             myLocationButtonEnabled: false,
                             zoomControlsEnabled: false,
