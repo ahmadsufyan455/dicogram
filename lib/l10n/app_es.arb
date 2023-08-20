@@ -19,6 +19,8 @@
     "hoursAgo": "{hours} horas atras",
     "noData": "No más datos",
     "profile": "Perfil",
+    "changeLang": "Cambiar idioma",
+    "logout": "Cerrar sesión",
     "@hoursAgo": {
         "placeholders": {
             "hours": {

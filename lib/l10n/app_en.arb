@@ -19,6 +19,8 @@
     "hoursAgo": "{hours} hours ago",
     "noData": "No more data",
     "profile": "Profile",
+    "changeLang": "Change Language",
+    "logout": "Logout",
     "@hoursAgo": {
         "placeholders": {
             "hours": {

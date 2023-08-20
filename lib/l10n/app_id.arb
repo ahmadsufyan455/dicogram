@@ -19,6 +19,8 @@
     "hoursAgo": "{hours} jam yang lalu",
     "noData": "Datanya udah abis",
     "profile": "Profil",
+    "changeLang": "Ganti Bahasa",
+    "logout": "Keluar",
     "@hoursAgo": {
         "placeholders": {
             "hours": {
