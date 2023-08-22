@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
 import 'package:dicogram/data/model/add_story/add_story_model.dart';
+import 'package:dicogram/presentation/widget/custom_button.dart';
 import 'package:dicogram/router_v2.dart';
 import 'package:dicogram/utils/text_styles.dart';
 import 'package:dicogram/presentation/widget/text_input.dart';
@@ -74,81 +75,84 @@ class AddStoryPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  BlocConsumer<AddStoryBloc, AddStoryState>(
-                    listener: (context, state) {
-                      if (state is AddStoryError) {
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: Text(
-                              l10n.somethingWentWrong,
-                              style: TextStyles.title,
-                            ),
-                            content: Text(state.error, style: TextStyles.body),
-                            actions: [
-                              TextButton(
-                                onPressed: () => context.router.pop(),
-                                child: Text(
-                                  l10n.tryAgain,
-                                  style: TextStyles.body.copyWith(
-                                    color: Colors.deepPurple,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      } else if (state is AddStorySuccess) {
-                        context.router.pushAndPopUntil(
-                          const ListStoryRoute(),
-                          predicate: (route) => false,
-                        );
-                      }
-                    },
-                    builder: (context, state) {
-                      if (state is AddStoryLoading) {
-                        return const CircularProgressIndicator();
-                      }
-                      return IconButton(
-                        onPressed: () async {
-                          final imagePath =
-                              context.read<ImageCubit>().state.imagePath;
-                          final description = descriptionController.text;
-
-                          if (imagePath != null && description.isNotEmpty) {
-                            final imageFile = File(imagePath);
-                            final formData = RequestAddStory(
-                              description: description,
-                              photo: MultipartFile.fromFileSync(
-                                imageFile.path,
-                                filename: 'dicogram image',
-                              ),
-                            ).toFormData();
-
-                            if (context.mounted) {
-                              context
-                                  .read<AddStoryBloc>()
-                                  .add(AddStory(formData));
-                            }
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  l10n.dataNotComplete,
-                                ),
-                              ),
-                            );
-                          }
-                        },
-                        icon: const Icon(
-                          Icons.upload_rounded,
-                          color: Colors.deepPurple,
-                          size: 34,
-                        ),
-                      );
-                    },
+                  IconButton(
+                    onPressed: () => context.pushRoute(const LocationRoute()),
+                    icon: const Icon(
+                      Icons.add_location_rounded,
+                      color: Colors.deepPurple,
+                      size: 34,
+                    ),
                   ),
                 ],
+              ),
+              const SizedBox(height: 24.0),
+              BlocConsumer<AddStoryBloc, AddStoryState>(
+                listener: (context, state) {
+                  if (state is AddStoryError) {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text(
+                          l10n.somethingWentWrong,
+                          style: TextStyles.title,
+                        ),
+                        content: Text(state.error, style: TextStyles.body),
+                        actions: [
+                          TextButton(
+                            onPressed: () => context.router.pop(),
+                            child: Text(
+                              l10n.tryAgain,
+                              style: TextStyles.body.copyWith(
+                                color: Colors.deepPurple,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  } else if (state is AddStorySuccess) {
+                    context.router.pushAndPopUntil(
+                      const ListStoryRoute(),
+                      predicate: (route) => false,
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  if (state is AddStoryLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return CustomButton(
+                    label: l10n.addStory,
+                    onTap: () async {
+                      final imagePath =
+                          context.read<ImageCubit>().state.imagePath;
+                      final description = descriptionController.text;
+
+                      if (imagePath != null && description.isNotEmpty) {
+                        final imageFile = File(imagePath);
+                        final formData = RequestAddStory(
+                          description: description,
+                          photo: MultipartFile.fromFileSync(
+                            imageFile.path,
+                            filename: 'dicogram image',
+                          ),
+                        ).toFormData();
+
+                        if (context.mounted) {
+                          context.read<AddStoryBloc>().add(AddStory(formData));
+                        }
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              l10n.dataNotComplete,
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                  );
+                },
               ),
             ],
           ),

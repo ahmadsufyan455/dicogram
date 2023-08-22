@@ -47,6 +47,12 @@ abstract class _$RouterV2 extends RootStackRouter {
         child: const ListStoryPage(),
       );
     },
+    LocationRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const LocationPage(),
+      );
+    },
     LoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -172,6 +178,20 @@ class ListStoryRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ListStoryRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [LocationPage]
+class LocationRoute extends PageRouteInfo<void> {
+  const LocationRoute({List<PageRouteInfo>? children})
+      : super(
+          LocationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LocationRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
