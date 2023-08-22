@@ -5,7 +5,7 @@ class StoryUseCase {
   final StoryRepository storyRepository;
   StoryUseCase({required this.storyRepository});
 
-  Future<StoryEntity> getStory({int? page, int? location}) {
-    return storyRepository.getStory(page: page, location: location);
+  Future<StoryEntity> getStory({int? page}) {
+    return storyRepository.getStory(page: page);
   }
 }
