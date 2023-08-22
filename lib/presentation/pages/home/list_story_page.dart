@@ -26,10 +26,6 @@ class ListStoryPage extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () => context.pushRoute(const MapsRoute()),
-            icon: const Icon(Icons.map_rounded, color: Colors.deepPurple),
-          ),
-          IconButton(
             onPressed: () => context.pushRoute(const ProfileRoute()),
             icon: const Icon(Icons.person_2_rounded, color: Colors.deepPurple),
           ),
