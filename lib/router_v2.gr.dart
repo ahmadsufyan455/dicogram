@@ -48,7 +48,7 @@ abstract class _$RouterV2 extends RootStackRouter {
       );
     },
     LocationRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
+      return AutoRoutePage<List<dynamic>>(
         routeData: routeData,
         child: const LocationPage(),
       );

@@ -18,13 +18,22 @@ import 'bloc/add_story_bloc.dart';
 import 'cubit/image_cubit.dart';
 
 @RoutePage()
-class AddStoryPage extends StatelessWidget {
+class AddStoryPage extends StatefulWidget {
   const AddStoryPage({super.key});
+
+  @override
+  State<AddStoryPage> createState() => _AddStoryPageState();
+}
+
+class _AddStoryPageState extends State<AddStoryPage> {
+  final descriptionController = TextEditingController();
+  double? lat;
+  double? lon;
+  String? address;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final descriptionController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
@@ -76,7 +85,15 @@ class AddStoryPage extends StatelessWidget {
                   ),
                   const SizedBox(width: 10),
                   IconButton(
-                    onPressed: () => context.pushRoute(const LocationRoute()),
+                    onPressed: () async {
+                      final result = await context
+                          .pushRoute<List<dynamic>>(const LocationRoute());
+                      setState(() {
+                        lat = result?[0];
+                        lon = result?[1];
+                        address = result?[2];
+                      });
+                    },
                     icon: const Icon(
                       Icons.add_location_rounded,
                       color: Colors.deepPurple,
@@ -85,7 +102,18 @@ class AddStoryPage extends StatelessWidget {
                   ),
                 ],
               ),
-              // TODO add location based on lat lon from location page
+              if (address != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Icon(Icons.pin_drop, color: Colors.redAccent),
+                      const SizedBox(width: 8.0),
+                      Flexible(child: Text(address!, style: TextStyles.body)),
+                    ],
+                  ),
+                ),
               const SizedBox(height: 24.0),
               BlocConsumer<AddStoryBloc, AddStoryState>(
                 listener: (context, state) {
@@ -137,7 +165,8 @@ class AddStoryPage extends StatelessWidget {
                             imageFile.path,
                             filename: 'dicogram image',
                           ),
-                          // TODO lat lon for request data
+                          lat: lat,
+                          lon: lon,
                         ).toFormData();
 
                         if (context.mounted) {
@@ -213,5 +242,11 @@ class AddStoryPage extends StatelessWidget {
       File(imagePath),
       fit: BoxFit.contain,
     );
+  }
+
+  @override
+  void dispose() {
+    descriptionController.dispose();
+    super.dispose();
   }
 }

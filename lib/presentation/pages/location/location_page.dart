@@ -7,8 +7,7 @@ import 'package:location/location.dart';
 import '../../../utils/text_styles.dart';
 import '../../widget/pacemark.dart';
 
-// TODO change statefull to cubit
-@RoutePage()
+@RoutePage<List<dynamic>>()
 class LocationPage extends StatefulWidget {
   const LocationPage({super.key});
 
@@ -22,17 +21,23 @@ class _LocationPageState extends State<LocationPage> {
   late final Set<Marker> markers = {};
   geo.Placemark? placemark;
 
+  double? latitude;
+  double? longitude;
+  String? address;
+
   void onLongPressGoogleMap(LatLng latLng) async {
     final info =
         await geo.placemarkFromCoordinates(latLng.latitude, latLng.longitude);
     final place = info[0];
     final street = place.street!;
-    final address =
+    address =
         '${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}';
     setState(() {
       placemark = place;
+      latitude = latLng.latitude;
+      longitude = latLng.longitude;
     });
-    defineMarker(latLng, street, address);
+    defineMarker(latLng, street, address!);
     mapController.animateCamera(
       CameraUpdate.newLatLng(latLng),
     );
@@ -77,13 +82,15 @@ class _LocationPageState extends State<LocationPage> {
         await geo.placemarkFromCoordinates(latLng.latitude, latLng.longitude);
     final place = info[0];
     final street = place.street!;
-    final address =
+    address =
         '${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}';
     setState(() {
       placemark = place;
+      latitude = latLng.latitude;
+      longitude = latLng.longitude;
     });
 
-    defineMarker(latLng, street, address);
+    defineMarker(latLng, street, address!);
 
     mapController.animateCamera(
       CameraUpdate.newLatLng(latLng),
@@ -116,12 +123,14 @@ class _LocationPageState extends State<LocationPage> {
                           dicodingOffice.latitude, dicodingOffice.longitude);
                       final place = info[0];
                       final street = place.street!;
-                      final address =
+                      address =
                           '${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}';
                       setState(() {
                         placemark = place;
+                        latitude = dicodingOffice.latitude;
+                        longitude = dicodingOffice.longitude;
                       });
-                      defineMarker(dicodingOffice, street, address);
+                      defineMarker(dicodingOffice, street, address!);
 
                       setState(() {
                         mapController = controller;
@@ -154,9 +163,7 @@ class _LocationPageState extends State<LocationPage> {
             else
               PlacemarkWidget(
                 placemark: placemark!,
-                // TODO get lat lon
-                // TODO send back lat lon result
-                onTap: () => context.router.pop(),
+                onTap: () => context.router.pop([latitude, longitude, address]),
               ),
           ],
         ),
