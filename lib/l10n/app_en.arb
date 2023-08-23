@@ -20,6 +20,8 @@
     "noData": "No more data",
     "profile": "Profile",
     "changeLang": "Change Language",
+    "setLocation": "Set Pinpoint Location",
+    "pickLocation": "Pick Location",
     "logout": "Logout",
     "@hoursAgo": {
         "placeholders": {

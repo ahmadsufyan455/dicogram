@@ -20,6 +20,8 @@
     "noData": "Datanya udah abis",
     "profile": "Profil",
     "changeLang": "Ganti Bahasa",
+    "setLocation": "Atur Pinpoin Lokasi",
+    "pickLocation": "Pilih Lokasi",
     "logout": "Keluar",
     "@hoursAgo": {
         "placeholders": {

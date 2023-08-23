@@ -20,6 +20,8 @@
     "noData": "No más datos",
     "profile": "Perfil",
     "changeLang": "Cambiar idioma",
+    "setLocation": "Establecer ubicación precisa",
+    "pickLocation": "Elegir ubicación",
     "logout": "Cerrar sesión",
     "@hoursAgo": {
         "placeholders": {

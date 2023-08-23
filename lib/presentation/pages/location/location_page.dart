@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart' as geo;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../utils/text_styles.dart';
 import '../../widget/pacemark.dart';
@@ -45,7 +46,7 @@ class _LocationPageState extends State<LocationPage> {
 
   void defineMarker(LatLng latLng, String street, String address) {
     final marker = Marker(
-      markerId: const MarkerId("source"),
+      markerId: const MarkerId("dicogram"),
       position: latLng,
       infoWindow: InfoWindow(
         title: street,
@@ -102,7 +103,7 @@ class _LocationPageState extends State<LocationPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Set Pinpoint Location',
+          AppLocalizations.of(context)!.setLocation,
           style: TextStyles.body.copyWith(fontSize: 20),
         ),
         centerTitle: true,

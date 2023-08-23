@@ -2,6 +2,7 @@ import 'package:dicogram/presentation/widget/custom_button.dart';
 import 'package:dicogram/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart' as geo;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PlacemarkWidget extends StatelessWidget {
   const PlacemarkWidget({
@@ -27,7 +28,10 @@ class PlacemarkWidget extends StatelessWidget {
             style: TextStyles.body,
           ),
           const SizedBox(height: 16.0),
-          CustomButton(label: 'Pick Location', onTap: onTap),
+          CustomButton(
+            label: AppLocalizations.of(context)!.pickLocation,
+            onTap: onTap,
+          ),
         ],
       ),
     );
