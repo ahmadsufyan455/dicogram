@@ -85,6 +85,7 @@ class AddStoryPage extends StatelessWidget {
                   ),
                 ],
               ),
+              // TODO add location based on lat lon from location page
               const SizedBox(height: 24.0),
               BlocConsumer<AddStoryBloc, AddStoryState>(
                 listener: (context, state) {
@@ -136,6 +137,7 @@ class AddStoryPage extends StatelessWidget {
                             imageFile.path,
                             filename: 'dicogram image',
                           ),
+                          // TODO lat lon for request data
                         ).toFormData();
 
                         if (context.mounted) {

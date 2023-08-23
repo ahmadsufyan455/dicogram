@@ -7,6 +7,7 @@ import 'package:location/location.dart';
 import '../../../utils/text_styles.dart';
 import '../../widget/pacemark.dart';
 
+// TODO change statefull to cubit
 @RoutePage()
 class LocationPage extends StatefulWidget {
   const LocationPage({super.key});
@@ -153,6 +154,8 @@ class _LocationPageState extends State<LocationPage> {
             else
               PlacemarkWidget(
                 placemark: placemark!,
+                // TODO get lat lon
+                // TODO send back lat lon result
                 onTap: () => context.router.pop(),
               ),
           ],
