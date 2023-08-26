@@ -8,16 +8,9 @@ import 'package:dicogram/router_v2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'injection.dart' as di;
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await di.init();
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Dicogram extends StatelessWidget {
+  const Dicogram({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +33,6 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {
           return MaterialApp.router(
-            debugShowCheckedModeBanner: false,
             title: 'Dicogram',
             locale: state.selectedLanguage.value,
             supportedLocales: AppLocalizations.supportedLocales,

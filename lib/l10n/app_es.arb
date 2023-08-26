@@ -23,6 +23,9 @@
     "setLocation": "Establecer ubicación precisa",
     "pickLocation": "Elegir ubicación",
     "logout": "Cerrar sesión",
+    "premiumFeature": "Función premium",
+    "upgradePremium": "Actualiza la aplicación a premium para usar estas funciones",
+    "ok": "Bueno",
     "@hoursAgo": {
         "placeholders": {
             "hours": {

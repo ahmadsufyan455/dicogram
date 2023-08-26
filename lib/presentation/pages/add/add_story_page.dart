@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
 import 'package:dicogram/data/model/add_story/add_story_model.dart';
+import 'package:dicogram/flavor_config.dart';
 import 'package:dicogram/presentation/widget/custom_button.dart';
 import 'package:dicogram/router_v2.dart';
 import 'package:dicogram/utils/text_styles.dart';
@@ -86,13 +87,38 @@ class _AddStoryPageState extends State<AddStoryPage> {
                   const SizedBox(width: 10),
                   IconButton(
                     onPressed: () async {
-                      final result = await context
-                          .pushRoute<List<dynamic>>(const LocationRoute());
-                      setState(() {
-                        lat = result?[0];
-                        lon = result?[1];
-                        address = result?[2];
-                      });
+                      if (FlavorConfig.instance.flavorType == FlavorType.paid) {
+                        final result = await context
+                            .pushRoute<List<dynamic>>(const LocationRoute());
+                        setState(() {
+                          lat = result?[0];
+                          lon = result?[1];
+                          address = result?[2];
+                        });
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text(
+                              l10n.premiumFeature,
+                              style: TextStyles.title,
+                            ),
+                            content: Text(l10n.upgradePremium,
+                                style: TextStyles.body),
+                            actions: [
+                              TextButton(
+                                onPressed: () => context.router.pop(),
+                                child: Text(
+                                  l10n.ok,
+                                  style: TextStyles.body.copyWith(
+                                    color: Colors.deepPurple,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
                     },
                     icon: const Icon(
                       Icons.add_location_rounded,

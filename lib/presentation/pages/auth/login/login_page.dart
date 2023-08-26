@@ -25,6 +25,11 @@ class _LoginPageState extends State<LoginPage> {
   bool isObscure = true;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();

@@ -23,6 +23,9 @@
     "setLocation": "Atur Pinpoin Lokasi",
     "pickLocation": "Pilih Lokasi",
     "logout": "Keluar",
+    "premiumFeature": "Fitur Berbayar",
+    "upgradePremium": "Upgrade ke premium untuk menikmati fitur ini",
+    "ok": "Oke",
     "@hoursAgo": {
         "placeholders": {
             "hours": {

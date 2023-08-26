@@ -22,6 +22,9 @@
     "changeLang": "Change Language",
     "setLocation": "Set Pinpoint Location",
     "pickLocation": "Pick Location",
+    "premiumFeature": "Premium Feature",
+    "upgradePremium": "Upgrade app to premium for using this features",
+    "ok": "Ok",
     "logout": "Logout",
     "@hoursAgo": {
         "placeholders": {

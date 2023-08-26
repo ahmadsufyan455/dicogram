@@ -1,0 +1,26 @@
+{
+  "configurations": [
+    {
+      "name": "free_release",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main_free.dart",
+      "flutterMode": "release",
+      "args": [
+        "--flavor",
+        "free"
+      ]
+    },
+    {
+      "name": "paid_release",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main_paid.dart",
+      "flutterMode": "release",
+      "args": [
+        "--flavor",
+        "paid"
+      ]
+    }
+  ]
+}
