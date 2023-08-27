@@ -41,32 +41,33 @@ Future<void> init() async {
       .registerFactory(() => AddStoryBloc(addStoryUseCase: serviceLocator()));
 
   // ! domain layer
-  serviceLocator
-      .registerFactory(() => LoginUseCase(loginRepository: serviceLocator()));
-  serviceLocator.registerFactory(
+  serviceLocator.registerLazySingleton(
+      () => LoginUseCase(loginRepository: serviceLocator()));
+  serviceLocator.registerLazySingleton(
       () => RegisterUsecase(registerRepository: serviceLocator()));
-  serviceLocator
-      .registerFactory(() => StoryUseCase(storyRepository: serviceLocator()));
-  serviceLocator
-      .registerFactory(() => DetailUseCase(detailRepository: serviceLocator()));
-  serviceLocator.registerFactory(
+  serviceLocator.registerLazySingleton(
+      () => StoryUseCase(storyRepository: serviceLocator()));
+  serviceLocator.registerLazySingleton(
+      () => DetailUseCase(detailRepository: serviceLocator()));
+  serviceLocator.registerLazySingleton(
       () => AddStoryUseCase(addStoryRepository: serviceLocator()));
 
   // ! data layer
-  serviceLocator.registerFactory<LoginRepository>(
+  serviceLocator.registerLazySingleton<LoginRepository>(
       () => LoginRepositoryImpl(remoteDataSource: serviceLocator()));
-  serviceLocator.registerFactory<RegisterRepository>(
+  serviceLocator.registerLazySingleton<RegisterRepository>(
       () => RegisterRepositoryImpl(remoteDataSource: serviceLocator()));
-  serviceLocator.registerFactory<StoryRepository>(
+  serviceLocator.registerLazySingleton<StoryRepository>(
       () => StoryRepositoryImpl(remoteDataSource: serviceLocator()));
-  serviceLocator.registerFactory<DetailRepository>(
+  serviceLocator.registerLazySingleton<DetailRepository>(
       () => DetailRepositoryImpl(remoteDataSource: serviceLocator()));
-  serviceLocator.registerFactory<AddStoryRepository>(
+  serviceLocator.registerLazySingleton<AddStoryRepository>(
       () => AddStoryRepositoryImpl(remoteDataSource: serviceLocator()));
 
-  serviceLocator.registerFactory<RemoteDataSource>(
+  serviceLocator.registerLazySingleton<RemoteDataSource>(
       () => RemoteDataSourceImpl(dio: serviceLocator()));
 
   // ! external
-  serviceLocator.registerFactory(() => Dio(BaseOptions(baseUrl: baseURL)));
+  serviceLocator
+      .registerLazySingleton(() => Dio(BaseOptions(baseUrl: baseURL)));
 }
