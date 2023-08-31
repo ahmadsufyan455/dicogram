@@ -56,7 +56,6 @@ class DetailPage extends StatelessWidget {
 
   Widget _showDetail(BuildContext context, DetailResultEntity story) {
     final mapsCubit = context.read<MapsDetailCubit>();
-    String? city;
     return Column(
       children: [
         ClipRRect(
@@ -93,12 +92,11 @@ class DetailPage extends StatelessWidget {
               const SizedBox(height: 24),
               Icon(Icons.location_on, color: Colors.red.shade400),
               const SizedBox(height: 4),
-              FutureBuilder<String?>(
+              FutureBuilder<String>(
                 future: Helper.getCity(story.lat!, story.lon!),
                 builder: (context, snapshot) {
-                  city = snapshot.data;
                   return Text(
-                    city ?? 'Unknown',
+                    snapshot.data ?? 'Unknown',
                     style: TextStyles.subtitle,
                   );
                 },
@@ -126,7 +124,6 @@ class DetailPage extends StatelessWidget {
                               controller,
                               story.lat!,
                               story.lon!,
-                              city!,
                             ),
                             myLocationButtonEnabled: false,
                             zoomControlsEnabled: false,

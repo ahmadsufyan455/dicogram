@@ -4,16 +4,13 @@ import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Helper {
-  static Future<String?> getCity(
+  static Future<String> getCity(
     double latitude,
     double longitude,
   ) async {
     List<Placemark> placemarks =
         await placemarkFromCoordinates(latitude, longitude);
-    if (placemarks.isEmpty) {
-      return null;
-    }
-    return placemarks[0].locality;
+    return placemarks[0].locality ?? 'Unknown city';
   }
 
   static String formatTimestamp(BuildContext context, String timestamp) {

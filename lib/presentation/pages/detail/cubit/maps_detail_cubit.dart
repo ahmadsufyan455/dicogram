@@ -1,3 +1,4 @@
+import 'package:dicogram/utils/helper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -12,8 +13,7 @@ class MapsDetailCubit extends Cubit<MapsDetailState> {
     GoogleMapController controller,
     double lat,
     double lon,
-    String city,
-  ) {
+  ) async {
     final center = LatLng(lat, lon);
     final marker = Marker(
       markerId: const MarkerId("dicogram"),
@@ -23,7 +23,7 @@ class MapsDetailCubit extends Cubit<MapsDetailState> {
           CameraUpdate.newLatLngZoom(center, 18),
         );
       },
-      infoWindow: InfoWindow(title: city),
+      infoWindow: InfoWindow(title: await Helper.getCity(lat, lon)),
     );
     emit(state.copyWith(mapController: controller, markers: {marker}));
   }
